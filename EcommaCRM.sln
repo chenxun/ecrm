@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{2FDA9270-1D10-4087-8E35-B0ED3A24F2BC}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{EA979BCA-69C3-484C-9B01-72504C28B25B}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommaCrm", "Web\EcommaCrm.csproj", "{696CF849-501A-4BD4-96B3-0D84E7F1CB1E}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessFacade", "BusinessFacade\BusinessFacade.csproj", "{1E0F1BDE-9B08-4641-9B7E-EBA2AEAAC1A1}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FDA9270-1D10-4087-8E35-B0ED3A24F2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDA9270-1D10-4087-8E35-B0ED3A24F2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDA9270-1D10-4087-8E35-B0ED3A24F2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDA9270-1D10-4087-8E35-B0ED3A24F2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA979BCA-69C3-484C-9B01-72504C28B25B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA979BCA-69C3-484C-9B01-72504C28B25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA979BCA-69C3-484C-9B01-72504C28B25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA979BCA-69C3-484C-9B01-72504C28B25B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696CF849-501A-4BD4-96B3-0D84E7F1CB1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696CF849-501A-4BD4-96B3-0D84E7F1CB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696CF849-501A-4BD4-96B3-0D84E7F1CB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696CF849-501A-4BD4-96B3-0D84E7F1CB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E0F1BDE-9B08-4641-9B7E-EBA2AEAAC1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E0F1BDE-9B08-4641-9B7E-EBA2AEAAC1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E0F1BDE-9B08-4641-9B7E-EBA2AEAAC1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E0F1BDE-9B08-4641-9B7E-EBA2AEAAC1A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

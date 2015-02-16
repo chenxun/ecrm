@@ -12,7 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Configuration;
 using System.Net;
-
+using System.Collections;
 
 namespace Powerson.Framework
 {
@@ -854,7 +854,26 @@ namespace Powerson.Framework
 		{
 			return p_origin.Replace("<","&lt;").Replace(">","&gt;").Replace("\r\n","<br>");
 		}
-		#endregion
+        /// <summary>
+        /// 将一个字符串按照某个分割符，生成ArrayList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="pattern">分割符</param>
+        /// <returns></returns>
+        public static ArrayList StrToArray(string input, string pattern)
+        {
+            string[] strItems = System.Text.RegularExpressions.Regex.Split(input, pattern);
+            ArrayList alRet = new ArrayList();
+            foreach (string strItem in strItems)
+            {
+                if (strItem != "")
+                {
+                    alRet.Add(strItem);
+                }
+            }
+            return alRet;
+        }
+        #endregion
 		/////////////////////////////////////////////////////////////////////////////
 		
 		/////////////////////////////////////////////////////////////////////////////
