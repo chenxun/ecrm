@@ -4,6 +4,7 @@ class DelegateWebserviceController < ActionWebService::WebServiceController
 	
 	wsdl_service_name 'ecrm'
 	web_service :customer, CustomerService.new
+	web_service :user, UserService.new
 #	web_service_dispatching_mode :delegated
 #	web_service_scaffold :invoke
 

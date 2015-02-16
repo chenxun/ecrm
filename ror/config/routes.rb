@@ -1,6 +1,7 @@
 Ecrm::Application.routes.draw do
   get 'delegate_webservice/wsdl'
   post 'delegate_webservice/customer'
+  post 'delegate_webservice/user'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

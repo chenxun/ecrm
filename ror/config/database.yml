@@ -20,8 +20,8 @@ test:
 
 production:
   adapter: sqlserver
-  host: 10.232.22.90
-  database: ecrm
-  username: ecrm
-  password: ecrm1234
+  host: 127.0.0.1
+  database: nobase
+  username: name
+  password: password
 

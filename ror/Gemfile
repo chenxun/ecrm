@@ -6,7 +6,6 @@ gem 'rails', '3.2.21'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'activerecord-sqlserver-adapter', '~> 3.2.12'
 #gem 'tiny_tds', :git=>'https://github.com/rails-sqlserver/tiny_tds.git'
 gem "soap4r-ruby1.9", "~> 2.0.5"
 #gem 'keeguon-actionwebservice', '~> 3.1.2'
@@ -22,7 +21,11 @@ group :assets do
 
 #  gem 'uglifier', '>= 1.0.3'
 end
-
+# production use sql server on suixin server
+group :production do
+	gem 'tiny_tds', '~>0.6.2'
+	gem 'activerecord-sqlserver-adapter', '~> 3.2.12'
+end
 #gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
