@@ -26,7 +26,7 @@ namespace Powerson.Framework
             StreamWriter _Sw = null;
             try
             {
-	            _Fs = new FileStream(str_path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                _Fs = new FileStream(full_path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 	            _Sw = new StreamWriter(_Fs, System.Text.Encoding.Unicode);
 	            _Sw.BaseStream.Seek(0, SeekOrigin.End);
 	            _Sw.WriteLine("------------------------------------\r\n");

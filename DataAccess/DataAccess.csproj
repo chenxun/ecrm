@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="DataCommon.cs" />
     <Compile Include="MysqlDataCommon.cs" />
+    <Compile Include="OleDataCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlDataCommon.cs" />
   </ItemGroup>
