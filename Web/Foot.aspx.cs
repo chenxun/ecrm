@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using Powerson.BusinessFacade;
-using Powerson.SystemFramework;
+using Powerson.Framework;
 using Powerson.DataAccess;
 
 namespace Powerson.Web
@@ -26,7 +26,6 @@ namespace Powerson.Web
             DataTable dt_f = null;// LoginSession.GetFrameRank(this);
             if (null == dt_f || dt_f.Rows.Count == 0)
                 return;
-
             DataRow[] drs = dt_f.Select("FrameLevel=1");
             if (drs.Length.Equals(0))
             {

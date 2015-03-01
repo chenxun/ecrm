@@ -20,6 +20,18 @@ namespace Powerson.Web
         {
             if (!IsPostBack)
             {
+                //customerService = new EcrmCustomerBinding();
+                //TdCustomerResult tt = customerService.GetCustomerById(2);
+                ////TdUserResult uu = customerService.GetUserById(0);
+                ////Customer c = customerService.Add("");
+                //TdUserRequest req = new TdUserRequest();
+                ////Customer cc = new Customer();
+                ////cc.id = 1;
+                ////cc.customer_name = "xunchen";
+                ////cc = (Customer)req.user;
+                //req.user_name = "xunchen";
+                //req.password = StringUtil.MD5Hash(Properties.Settings.Default.INITIALPASSWORD);
+                ////TdUserResult res = userService.AddUser(req);
             }
         }
 
@@ -31,17 +43,19 @@ namespace Powerson.Web
                 AddLoadMessage( "—È÷§¬Î¥ÌŒÛ");
                 return;
             }
+            //TdCustomerResult tt = customerService.GetCustomerById(2);
             TdUserResult res = userService.GetUserByName(TextBox_name.Text.TrimEnd().ToLower());
             if (!res.result)
             {
                 AddLoadMessage(res.msg);
                 return;
             }
-            if (!res.user.password.Equals(StringUtil.MD5Hash(TextBox_password.Text)))
+            if (!res.users[0].password.Equals(StringUtil.MD5Hash(TextBox_password.Text)))
             {
-                AddLoadMessage("√‹¬Î¥ÌŒÛ°£");
+                AddLoadMessage("√‹¬Î¥ÌŒÛ");
                 return;
             }
+            CurrentUserId = res.users[0].id;
             //LoginSession.SetIsLogin(this, true);
             //LoginSession.SetCurrentUser(this, u);
 
@@ -51,7 +65,7 @@ namespace Powerson.Web
             //    LoginSession.SetFrameRank(this, dt_f);
             //}
 
-            //Response.Redirect("home.aspx");
+            Response.Redirect("home.aspx");
             return;
         }
     }

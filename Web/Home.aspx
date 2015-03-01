@@ -1,8 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Powerson.Web.Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Codebehind="Home.aspx.cs" Inherits="Powerson.Web.Home" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
-
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>源易网络CRM客户管理系统</title>
 </head>

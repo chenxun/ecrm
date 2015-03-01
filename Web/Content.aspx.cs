@@ -20,25 +20,25 @@ namespace Powerson.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             PageDataBind();
-            TodayPlanBind();
+            //TodayPlanBind();
             //AddJavaScript(string.Format("NewUrl('Notice_index.aspx','main');"));
         }
         private void PageDataBind()
         {
             ComponentArt.Web.UI.NavBarItem newItem;
 
-            Frame[] frames = userService.GetFramesByUserId(0);
+            Frame[] frames = userService.GetFramesByUserId(CurrentUserId);
             //DataTable dtFrameRank = LoginSession.GetFrameRank(this);
             foreach (Frame frame in frames)
             {
-                if (frame.parent_id == 0)
-                    continue;
+                if (frame.parent_id != 0)
+                    continue;//如果不是一级菜单就skip
                 newItem = CreateItem(frame.name, null, frame.image_file);
                 _NavBarContent.Items.Add(newItem);
 
                 foreach (Frame child in frames)
                 {
-                    if (child.id != frame.parent_id)
+                    if (child.parent_id != frame.id)
                         continue;
                     ComponentArt.Web.UI.NavBarItem childItem = CreateItem(child.name, child.navigate_url, child.image_file);
                     newItem.Items.Add(childItem);

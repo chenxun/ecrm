@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using Powerson.BusinessFacade;
-using Powerson.SystemFramework;
+using Powerson.Framework;
 using Powerson.DataAccess;
 
 namespace Powerson.Web
@@ -19,7 +19,7 @@ namespace Powerson.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             //findFirstFrame();
-            ViewBoard();
+            //ViewBoard();
         }
         private void findFirstFrame()
         {

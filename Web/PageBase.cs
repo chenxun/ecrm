@@ -1,4 +1,4 @@
-//----------------------------------------------------------------
+ï»¿//----------------------------------------------------------------
 
 //----------------------------------------------------------------
 
@@ -11,10 +11,9 @@ namespace Powerson.Web
     using System.Data;
 
     using Powerson.Framework;
-    //using Powerson.BusinessFacade;
+    using Powerson.BusinessFacade;
 	using Powerson.DataAccess;
     using RailsService;
-
     /// <summary>
     ///     The code-behind base class for all pages.
     ///     <remarks>
@@ -23,13 +22,16 @@ namespace Powerson.Web
     /// </summary>
     public class PageBase : System.Web.UI.Page
     {
-		string _loadMsg = "";
+        protected enum CommandNameType { NEW, EDIT, DELETE, NULL, LIMITEDIT };
+        
+        string _loadMsg = "";
 		
 		protected string valCode;
 
 		protected DataCommon dataCommon;
-        protected ecrmUserBinding userService;
-        protected ecrmCustomerBinding customerService;
+        protected EcrmUserBinding userService;
+        protected EcrmCustomerBinding customerService;
+        protected User me;
         //protected UserService userService;
         //protected CustomerService customerService;
         //protected RoleService roleService;
@@ -38,7 +40,7 @@ namespace Powerson.Web
 
 		protected override void OnInit(EventArgs e)
 		{
-			// È»ºó¸ù¾İÅäÖÃÎÄ¼şµÄÊı¾İ¿âÀàĞÍ£¬³õÊ¼»¯Êı¾İ·ÃÎÊ¶ÔÏó [6/15/2008]
+			// ç„¶åæ ¹æ®é…ç½®æ–‡ä»¶çš„æ•°æ®åº“ç±»å‹ï¼Œåˆå§‹åŒ–æ•°æ®è®¿é—®å¯¹è±¡ [6/15/2008]
 			switch(Properties.Settings.Default.DBTYPE.ToLower())
 			{
 				case "ole":
@@ -50,8 +52,8 @@ namespace Powerson.Web
 				default:
 					break;
 			}
-			// ³õÊ¼»¯ÓÃ»§·şÎñ¶ÔÏó [9/23/2008]
-            userService = new ecrmUserBinding();
+			// åˆå§‹åŒ–ç”¨æˆ·æœåŠ¡å¯¹è±¡ [9/23/2008]
+            userService = new EcrmUserBinding();
             //this.userService = new UserService();
             //userService.ServiceDataCommon = this.dataCommon;
             //customerService = new CustomerService();
@@ -62,14 +64,26 @@ namespace Powerson.Web
             //flowService.ServiceDataCommon = dataCommon;
             //orderService = new OrderService();
             //orderService.ServiceDataCommon = dataCommon;
-			
+            
 			base.OnInit(e);
 		}
+
+        protected void GetCurrentUser()
+        {
+            if (null != me)
+                return;
+            int userid = CurrentUserId;
+            if (0 == userid)
+                return;
+            TdUserResult res = userService.GetUserById(userid);
+            if (!res.result)
+                return;
+            me = res.users[0];
+        }
 		protected override void OnError(EventArgs e)
 		{
 			string str_msg = Server.GetLastError().ToString();
-            string str_errorCode = DateTime.Now.ToShortDateString() + DateTime.Now.ToLongTimeString();
-            str_errorCode = str_errorCode.Replace(":", "").Replace("-", "");
+            string str_errorCode = DateTime.Now.Day + DateTime.Now.ToLongTimeString().Replace(":", "");
             FlyLog.WriteLog(string.Format("{0}\r\n{1}", str_errorCode, str_msg));
             Response.Redirect(string.Format("Error.aspx?code={0}", str_errorCode));
 		}
@@ -89,8 +103,7 @@ namespace Powerson.Web
 			{
 				return null;
 			}
-			string strRet = Request.QueryString[name].ToString();
-			return strRet;
+			return Request.QueryString[name].ToString();
 		}
 
 		protected void AddLoadMessage(string p_msg)
@@ -98,18 +111,18 @@ namespace Powerson.Web
 			_loadMsg += p_msg;
 		}
         /// <summary>
-        /// ½«Ò»¸öDataTableµÄÊı¾İ£¬°ó¶¨µ½Ò»¸öList¿Ø¼ş£¬±ÈÈçÏÂÀ­²Ëµ¥
+        /// å°†ä¸€ä¸ªDataTableçš„æ•°æ®ï¼Œç»‘å®šåˆ°ä¸€ä¸ªListæ§ä»¶ï¼Œæ¯”å¦‚ä¸‹æ‹‰èœå•
         /// </summary>
-        /// <param name="targetControl">List¿Ø¼şµÄItemsÊôĞÔ¶ÔÏó</param>
-        /// <param name="dataSource">Êı¾İÔ´DataTale</param>
-        /// <param name="valueColumnName">List¿Ø¼şValue¶ÔÓ¦µÄDataTableÁĞÃû</param>
-        /// <param name="textColumnName">List¿Ø¼şText¶ÔÓ¦µÄDataTableÁĞÃû</param>
-        /// <param name="topText">List¿Ø¼şµÚÒ»ĞĞÏÔÊ¾µÄÎÄ×Ö£¬Èç¹ûÊÇnull£¬ÔòÃ»ÓĞµÚÒ»ĞĞ</param>
+        /// <param name="targetControl">Listæ§ä»¶çš„Itemså±æ€§å¯¹è±¡</param>
+        /// <param name="dataSource">æ•°æ®æºDataTale</param>
+        /// <param name="valueColumnName">Listæ§ä»¶Valueå¯¹åº”çš„DataTableåˆ—å</param>
+        /// <param name="textColumnName">Listæ§ä»¶Textå¯¹åº”çš„DataTableåˆ—å</param>
+        /// <param name="topText">Listæ§ä»¶ç¬¬ä¸€è¡Œæ˜¾ç¤ºçš„æ–‡å­—ï¼Œå¦‚æœæ˜¯nullï¼Œåˆ™æ²¡æœ‰ç¬¬ä¸€è¡Œ</param>
         protected void DataBind(ListItemCollection targetControl, DataTable dataSource, string valueColumnName, string textColumnName, string topText)
         {
             targetControl.Clear();
             if (null == dataSource)
-                throw new NullReferenceException(string.Format("ÎŞ·¨°ó¶¨¿Ø¼ş{0}£¬ÒòÎªÊı¾İÔ´ÊÇnull"));
+                throw new NullReferenceException(string.Format("æ— æ³•ç»‘å®šæ§ä»¶{0}ï¼Œå› ä¸ºæ•°æ®æºæ˜¯null"));
 
             if (null != topText)
             {
@@ -122,11 +135,11 @@ namespace Powerson.Web
             }
         }
         /// <summary>
-        /// ¸ù¾İ¿Ø¼şItemµÄValue£¬¶¨Î»µ½ÏàÓ¦µÄItem
+        /// æ ¹æ®æ§ä»¶Itemçš„Valueï¼Œå®šä½åˆ°ç›¸åº”çš„Item
         /// </summary>
-        /// <param name="p_control">ÓÃÓÚ¶¨Î»ItemµÄÏÂÀ­²Ëµ¥</param>
-        /// <param name="p_value">ĞèÒª¶¨Î»µÄItemµÄvalue</param>
-        public static void FocusItemByValue(ListControl p_control, string p_value)
+        /// <param name="p_control">ç”¨äºå®šä½Itemçš„ä¸‹æ‹‰èœå•</param>
+        /// <param name="p_value">éœ€è¦å®šä½çš„Itemçš„value</param>
+        protected void FocusItemByValue(ListControl p_control, string p_value)
         {
             p_control.ClearSelection();
             ListItem item = p_control.Items.FindByValue(p_value);
@@ -134,21 +147,33 @@ namespace Powerson.Web
                 item.Selected = true;
         }
         /// <summary>
-        /// ¸ù¾İ¿Ø¼şItemµÄText£¬¶¨Î»µ½ÏàÓ¦µÄItem
+        /// æ ¹æ®æ§ä»¶Itemçš„Textï¼Œå®šä½åˆ°ç›¸åº”çš„Item
         /// </summary>
-        /// <param name="p_control">ÓÃÓÚ¶¨Î»ItemµÄÏÂÀ­²Ëµ¥</param>
-        /// <param name="p_text">ĞèÒª¶¨Î»µÄItemµÄText</param>
-        public static void FocusItemByText(ListControl p_control, string p_text)
+        /// <param name="p_control">ç”¨äºå®šä½Itemçš„ä¸‹æ‹‰èœå•</param>
+        /// <param name="p_text">éœ€è¦å®šä½çš„Itemçš„Text</param>
+        protected void FocusItemByText(ListControl p_control, string p_text)
         {
             p_control.ClearSelection();
             ListItem item = p_control.Items.FindByText(p_text);
             if (null != item)
                 item.Selected = true;
         }
-
+        protected int CurrentUserId
+        {
+            get
+            {
+                if (Session["CurrentUser"] == null)
+                    return 0;
+                return Convert.ToInt32(Session["CurrentUser"]);
+            }
+            set
+            {
+                Session["CurrentUser"] = value;
+            }
+        }
         //protected string GetTip(string tipText)
         //{
-        //    return string.Format("this.T_TITLE='ÌáÊ¾';return escape('{0}');", tipText );
+        //    return string.Format("this.T_TITLE='æç¤º';return escape('{0}');", tipText );
         //}
         //protected ComponentArt.Web.UI.Calendar FindPicker(UserControl p_ctrl)
         //{
