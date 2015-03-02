@@ -2,4 +2,13 @@
 <customer>
   <area id="0" name="dd"></area>
   <in id="0" name="33"></in>
+  <visit_type id="1" name="初步接触"></visit_type>
+  <visit_type id="2" name="产品介绍"></visit_type>
+  <visit_type id="3" name="加深感情"></visit_type>
+  <visit_type id="4" name="需求调查"></visit_type>
+  <visit_type id="5" name="签定合同"></visit_type>
+  <visit_type id="6" name="客户确认"></visit_type>
+  <visit_type id="7" name="收款"></visit_type>
+  <visit_type id="8" name="续费业务"></visit_type>
+  <visit_type id="9" name="未拜访"></visit_type>
 </customer>
