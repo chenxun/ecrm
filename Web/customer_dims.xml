@@ -11,4 +11,32 @@
   <visit_type id="7" name="收款"></visit_type>
   <visit_type id="8" name="续费业务"></visit_type>
   <visit_type id="9" name="未拜访"></visit_type>
+  <industry_type id="1" name="电子电工"></industry_type>
+  <industry_type id="2" name="互联网相关"></industry_type>
+  <industry_type id="3" name="农林牧渔"></industry_type>
+  <industry_type id="4" name="服装服饰"></industry_type>
+  <industry_type id="5" name="安全防护"></industry_type>
+  <industry_type id="6" name="食品饮料"></industry_type>
+  <industry_type id="7" name="印刷出版"></industry_type>
+  <industry_type id="8" name="纺织皮革"></industry_type>
+  <industry_type id="9" name="环境保护"></industry_type>
+  <industry_type id="10" name="玩具"></industry_type>
+  <industry_type id="11" name="能源动力"></industry_type>
+  <industry_type id="12" name="建材房地产"></industry_type>
+  <industry_type id="13" name="交通运输"></industry_type>
+  <industry_type id="14" name="通讯"></industry_type>
+  <industry_type id="15" name="工业用品"></industry_type>
+  <industry_type id="16" name="商业服务"></industry_type>
+  <industry_type id="17" name="家居用品"></industry_type>
+  <industry_type id="18" name="化工"></industry_type>
+  <industry_type id="19" name="包装、纸"></industry_type>
+  <industry_type id="20" name="家用电器"></industry_type>
+  <industry_type id="21" name="医药、保养"></industry_type>
+  <industry_type id="22" name="汽摩及配件"></industry_type>
+  <industry_type id="23" name="电脑、软件"></industry_type>
+  <industry_type id="24" name="礼品、工艺品"></industry_type>
+  <industry_type id="25" name="运动休闲"></industry_type>
+  <industry_type id="26" name="冶金矿产"></industry_type>
+  <industry_type id="27" name="办公文教"></industry_type>
+  <industry_type id="28" name="其他行业"></industry_type>
 </customer>
