@@ -1,42 +1,217 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <customer>
-  <area id="0" name="dd"></area>
-  <in id="0" name="33"></in>
-  <visit_type id="1" name="初步接触"></visit_type>
-  <visit_type id="2" name="产品介绍"></visit_type>
-  <visit_type id="3" name="加深感情"></visit_type>
-  <visit_type id="4" name="需求调查"></visit_type>
-  <visit_type id="5" name="签定合同"></visit_type>
-  <visit_type id="6" name="客户确认"></visit_type>
-  <visit_type id="7" name="收款"></visit_type>
-  <visit_type id="8" name="续费业务"></visit_type>
-  <visit_type id="9" name="未拜访"></visit_type>
-  <industry_type id="1" name="电子电工"></industry_type>
-  <industry_type id="2" name="互联网相关"></industry_type>
-  <industry_type id="3" name="农林牧渔"></industry_type>
-  <industry_type id="4" name="服装服饰"></industry_type>
-  <industry_type id="5" name="安全防护"></industry_type>
-  <industry_type id="6" name="食品饮料"></industry_type>
-  <industry_type id="7" name="印刷出版"></industry_type>
-  <industry_type id="8" name="纺织皮革"></industry_type>
-  <industry_type id="9" name="环境保护"></industry_type>
-  <industry_type id="10" name="玩具"></industry_type>
-  <industry_type id="11" name="能源动力"></industry_type>
-  <industry_type id="12" name="建材房地产"></industry_type>
-  <industry_type id="13" name="交通运输"></industry_type>
-  <industry_type id="14" name="通讯"></industry_type>
-  <industry_type id="15" name="工业用品"></industry_type>
-  <industry_type id="16" name="商业服务"></industry_type>
-  <industry_type id="17" name="家居用品"></industry_type>
-  <industry_type id="18" name="化工"></industry_type>
-  <industry_type id="19" name="包装、纸"></industry_type>
-  <industry_type id="20" name="家用电器"></industry_type>
-  <industry_type id="21" name="医药、保养"></industry_type>
-  <industry_type id="22" name="汽摩及配件"></industry_type>
-  <industry_type id="23" name="电脑、软件"></industry_type>
-  <industry_type id="24" name="礼品、工艺品"></industry_type>
-  <industry_type id="25" name="运动休闲"></industry_type>
-  <industry_type id="26" name="冶金矿产"></industry_type>
-  <industry_type id="27" name="办公文教"></industry_type>
-  <industry_type id="28" name="其他行业"></industry_type>
+  <area id="1" name="上海">
+  </area>
+  <visit_type id="1" name="初步接触">
+  </visit_type>
+  <visit_type id="2" name="产品介绍">
+  </visit_type>
+  <visit_type id="3" name="加深感情">
+  </visit_type>
+  <visit_type id="4" name="需求调查">
+  </visit_type>
+  <visit_type id="5" name="签定合同">
+  </visit_type>
+  <visit_type id="6" name="客户确认">
+  </visit_type>
+  <visit_type id="7" name="收款">
+  </visit_type>
+  <visit_type id="8" name="续费业务">
+  </visit_type>
+  <visit_type id="9" name="未拜访">
+  </visit_type>
+  <industry_type id="1" name="电子电工">
+  </industry_type>
+  <industry_type id="2" name="互联网相关">
+  </industry_type>
+  <industry_type id="3" name="农林牧渔">
+  </industry_type>
+  <industry_type id="4" name="服装服饰">
+  </industry_type>
+  <industry_type id="5" name="安全防护">
+  </industry_type>
+  <industry_type id="6" name="食品饮料">
+  </industry_type>
+  <industry_type id="7" name="印刷出版">
+  </industry_type>
+  <industry_type id="8" name="纺织皮革">
+  </industry_type>
+  <industry_type id="9" name="环境保护">
+  </industry_type>
+  <industry_type id="10" name="玩具">
+  </industry_type>
+  <industry_type id="11" name="能源动力">
+  </industry_type>
+  <industry_type id="12" name="建材房地产">
+  </industry_type>
+  <industry_type id="13" name="交通运输">
+  </industry_type>
+  <industry_type id="14" name="通讯">
+  </industry_type>
+  <industry_type id="15" name="工业用品">
+  </industry_type>
+  <industry_type id="16" name="商业服务">
+  </industry_type>
+  <industry_type id="17" name="家居用品">
+  </industry_type>
+  <industry_type id="18" name="化工">
+  </industry_type>
+  <industry_type id="19" name="包装、纸">
+  </industry_type>
+  <industry_type id="20" name="家用电器">
+  </industry_type>
+  <industry_type id="21" name="医药、保养">
+  </industry_type>
+  <industry_type id="22" name="汽摩及配件">
+  </industry_type>
+  <industry_type id="23" name="电脑、软件">
+  </industry_type>
+  <industry_type id="24" name="礼品、工艺品">
+  </industry_type>
+  <industry_type id="25" name="运动休闲">
+  </industry_type>
+  <industry_type id="26" name="冶金矿产">
+  </industry_type>
+  <industry_type id="27" name="办公文教">
+  </industry_type>
+  <industry_type id="28" name="其他行业">
+  </industry_type>
+  <area id="2" name="北京">
+  </area>
+  <area id="3" name="天津">
+  </area>
+  <area id="4" name="重庆">
+  </area>
+  <area id="5" name="安徽">
+  </area>
+  <area id="6" name="福建">
+  </area>
+  <area id="7" name="甘肃">
+  </area>
+  <area id="8" name="广东">
+  </area>
+  <area id="9" name="广西">
+  </area>
+  <area id="10" name="贵州">
+  </area>
+  <area id="11" name="海南">
+  </area>
+  <area id="12" name="河北">
+  </area>
+  <area id="13" name="河南">
+  </area>
+  <area id="14" name="黑龙江">
+  </area>
+  <area id="15" name="湖北">
+  </area>
+  <area id="16" name="湖南">
+  </area>
+  <area id="17" name="内蒙古">
+  </area>
+  <area id="18" name="江苏">
+  </area>
+  <area id="19" name="江西">
+  </area>
+  <area id="20" name="吉林">
+  </area>
+  <area id="21" name="辽宁">
+  </area>
+  <area id="22" name="宁夏">
+  </area>
+  <area id="23" name="青海">
+  </area>
+  <area id="24" name="山东">
+  </area>
+  <area id="25" name="山西">
+  </area>
+  <area id="26" name="陕西">
+  </area>
+  <area id="27" name="四川">
+  </area>
+  <area id="28" name="西藏">
+  </area>
+  <area id="29" name="新疆">
+  </area>
+  <area id="30" name="云南">
+  </area>
+  <area id="31" name="浙江">
+  </area>
+  <area id="32" name="香港">
+  </area>
+  <area id="33" name="澳门">
+  </area>
+  <area id="34" name="台湾">
+  </area>
+  <area id="35" name="日本">
+  </area>
+  <area id="36" name="新加坡">
+  </area>
+  <area id="37" name="荷兰">
+  </area>
+  <area id="38" name="泰国">
+  </area>
+  <buy_intent id="1" name="域名、空间邮局类">
+  </buy_intent>
+  <buy_intent id="2" name="网站建设">
+  </buy_intent>
+  <buy_intent id="3" name="old诚信通">
+  </buy_intent>
+  <buy_intent id="4" name="关键词优化">
+  </buy_intent>
+  <buy_intent id="5" name="整站优化">
+  </buy_intent>
+  <buy_intent id="6" name="old竞价推广">
+  </buy_intent>
+  <buy_intent id="7" name="old网站维护">
+  </buy_intent>
+  <buy_intent id="8" name="old网络整合服务">
+  </buy_intent>
+  <buy_intent id="9" name="old意向需明确">
+  </buy_intent>
+  <buy_intent id="10" name="其他需求">
+  </buy_intent>
+  <buy_intent id="11" name="old危机公关">
+  </buy_intent>
+  <buy_intent id="12" name="网络声誉管理">
+  </buy_intent>
+  <buy_intent id="13" name="old月饼">
+  </buy_intent>
+  <buy_intent id="14" name="软文营销">
+  </buy_intent>
+  <buy_intent id="15" name="APP">
+  </buy_intent>
+  <buy_intent id="16" name="seo顾问服务">
+  </buy_intent>
+  <rank id="2" name="A类（已签单收款）">
+  </rank>
+  <rank id="3" name="B类（一周内签单）">
+  </rank>
+  <rank id="4" name="C类（KP，可合作，一个月内签单）">
+  </rank>
+  <rank id="5" name="D类（KP，意向度未明确）">
+  </rank>
+  <rank id="6" name="E类（非KP）">
+  </rank>
+  <rank id="7" name="F类（保持跟进）">
+  </rank>
+  <rank id="8" name="G类（基本无意向）">
+  </rank>
+  <rank id="10" name="H类（无法提供服务）">
+  </rank>
+  <source id="1" name="客户介绍">
+  </source>
+  <source id="2" name="自主开发">
+  </source>
+  <source id="3" name="来电咨询客户">
+  </source>
+  <source id="4" name="百度">
+  </source>
+  <source id="5" name="谷歌">
+  </source>
+  <source id="6" name="网址直接访问">
+  </source>
+  <source id="7" name="其他搜索引擎">
+  </source>
+  <source id="8" name="公司上门客户">
+  </source>
 </customer>

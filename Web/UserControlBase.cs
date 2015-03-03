@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Data;
 using System.Drawing;
 using System.Web;
@@ -8,47 +8,50 @@ using System.Web.UI.HtmlControls;
 using Powerson.Framework;
 using Powerson.BusinessFacade;
 using Powerson.DataAccess;
+using Powerson.Web.RailsService;
 
 namespace Powerson.Web
 {
 	/// <summary>
-	/// UserControlBase µÄÕªÒªËµÃ÷¡£
+	/// UserControlBase çš„æ‘˜è¦è¯´æ˜ã€‚
 	/// </summary>
 	public class UserControlBase : System.Web.UI.UserControl
 	{
 		protected DataCommon dataCommon;
-        //protected UserService userService;
-        //protected CustomerService customerService;
+        protected EcrmUserBinding userService;
+        protected EcrmCustomerBinding customerService;
+        protected User me;
         //protected RoleService roleService;
         //protected FlowService flowService;
         //protected OrderService orderService;
         //private CommandNameType ctrlAction = CommandNameType.NULL;
 		protected override void OnInit(EventArgs e)
 		{
-			// È»ºó¸ù¾İÅäÖÃÎÄ¼şµÄÊı¾İ¿âÀàĞÍ£¬³õÊ¼»¯Êı¾İ·ÃÎÊ¶ÔÏó [6/15/2008]
+			// ç„¶åæ ¹æ®é…ç½®æ–‡ä»¶çš„æ•°æ®åº“ç±»å‹ï¼Œåˆå§‹åŒ–æ•°æ®è®¿é—®å¯¹è±¡ [6/15/2008]
             switch (Properties.Settings.Default.DBTYPE.ToLower())
 			{
 				case "ole":
                     //dataCommon = new OleDataCommon();
 					break;
 				case "sql":
-					dataCommon = new SqlDataCommon(Properties.Settings.Default.CONNECTSTRING);
+                    //dataCommon = new SqlDataCommon(Properties.Settings.Default.CONNECTSTRING);
 					break;
 				default:
 					break;
 			}
-            //this.userService = new UserService();
-            //userService.ServiceDataCommon = this.dataCommon;
-            //customerService = new CustomerService();
-            //customerService.ServiceDataCommon = this.dataCommon;
-            //roleService = new RoleService();
-            //roleService.ServiceDataCommon = this.dataCommon;
-            //flowService = new FlowService();
-            //flowService.ServiceDataCommon = dataCommon;
-            //orderService = new OrderService();
-            //orderService.ServiceDataCommon = dataCommon;
+            userService = new EcrmUserBinding();
+            customerService = new EcrmCustomerBinding();
+            //GetMe();
             base.OnInit(e);
 		}
+
+        private void GetMe()
+        {
+            TdUserResult res = userService.GetUserById(CurrentUserId);
+            if (!res.result)
+                throw new Exception(res.msg);
+            me = res.users[0];
+        }
         //public CommandNameType CtrlAction
         //{
         //    set
@@ -60,9 +63,39 @@ namespace Powerson.Web
         //        return ctrlAction;
         //    }
         //}
+        /// <summary>
+        /// ä»æ—¥æœŸç»„åˆæ§ä»¶ä¸­æå–æ—¥å†æ§ä»¶ï¼Œç”¨äºget setæ—¥æœŸ
+        /// </summary>
+        /// <param name="p_ctrl">ç»„åˆæ§ä»¶çš„id</param>
+        /// <returns></returns>
         protected ComponentArt.Web.UI.Calendar FindPicker(UserControl p_ctrl)
         {
             return (ComponentArt.Web.UI.Calendar)p_ctrl.FindControl("Picker1");
+        }
+        /// <summary>
+        /// åˆ¤æ–­ç”¨æˆ·æ§ä»¶æ˜¯ä¸æ˜¯ç¬¬ä¸€æ¬¡load
+        /// </summary>
+        protected bool IsFirstLoad
+        {
+            get
+            {
+                if (ViewState["DataInit"] == null)
+                    return false;
+                return Convert.ToBoolean(ViewState["DataInit"]);
+            }
+            set
+            {
+                ViewState["DataInit"] = value;
+            }
+        }
+        protected int CurrentUserId
+        {
+            get
+            {
+                if (Session["CurrentUser"] == null)
+                    return 0;
+                return Convert.ToInt32(Session["CurrentUser"]);
+            }
         }
 
 	}

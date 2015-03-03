@@ -175,10 +175,10 @@ namespace Powerson.Web
         //{
         //    return string.Format("this.T_TITLE='提示';return escape('{0}');", tipText );
         //}
-        //protected ComponentArt.Web.UI.Calendar FindPicker(UserControl p_ctrl)
-        //{
-        //    return (ComponentArt.Web.UI.Calendar)p_ctrl.FindControl("Picker1");
-        //}
+        protected ComponentArt.Web.UI.Calendar FindPicker(UserControl p_ctrl)
+        {
+            return (ComponentArt.Web.UI.Calendar)p_ctrl.FindControl("Picker1");
+        }
 	} // class PageBase
     
 } 

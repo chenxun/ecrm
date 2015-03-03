@@ -23,15 +23,15 @@ namespace Powerson.Web.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DropDownList_area.DataBind();
             BaseDataBind();
         }
         private void BaseDataBind()
         {
-
+            if (IsFirstLoad)
+            {
+            }
             if (null == ViewState["DataInit"])
             {
-                DropDownListBind();
                 ValidatorBuild();
                 ViewState["DataInit"] = true;
             }
@@ -62,27 +62,6 @@ namespace Powerson.Web.Controls
             RequiredFieldValidator_companyName.ValidationGroup = str_valGroup;
             RequiredFieldValidator_keyword.ValidationGroup = str_valGroup;
         }
-        private void DropDownListBind()
-        {
-            //DropDownList_area.DataBind();
-            //DataSet ds = new DataSet();
-            //dataCommon.GetAllData(string.Format("SELECT * FROM [_IndustryType]"), ds, IndustryTypeData._INDUSTRYTYPE_TABLE);
-            //ListControlUtil.DataBind(DropDownList_industryType.Items, ds.Tables[IndustryTypeData._INDUSTRYTYPE_TABLE], IndustryTypeData.ID_FIELDS, IndustryTypeData.TYPENAME_FIELDS, null);
-
-            //dataCommon.GetAllData(string.Format("SELECT * FROM [_BuyIntent]"), ds, BuyIntentData._BUYINTENT_TABLE);
-            //ListControlUtil.DataBind(DropDownList_buyIntent.Items, ds.Tables[BuyIntentData._BUYINTENT_TABLE], BuyIntentData.ID_FIELDS, BuyIntentData.INTENTNAME_FIELDS, null);
-
-            ////ds = dataCommon.GetAllData("SELECT [VT_id], [VT_type] FROM [VisitType]");
-            ////ListControlUtil.DataBind(_DropDownListVisitType.Items, ds.Tables[0], "VT_id", "VT_type", "<请选择...>");
-
-            //dataCommon.GetAllData(string.Format("SELECT * FROM [_CustomerRank]"), ds, CustomerRankData._CUSTOMERRANK_TABLE);
-            //ListControlUtil.DataBind(DropDownList_customerRank.Items, ds.Tables[CustomerRankData._CUSTOMERRANK_TABLE], CustomerRankData.ID_FIELDS, CustomerRankData.RANKNAME_FIELDS, null);
-
-            //dataCommon.GetAllData(string.Format("SELECT * FROM [_area]"), ds, AreaData._AREA_TABLE);
-            //ListControlUtil.DataBind(DropDownList_area.Items, ds.Tables[AreaData._AREA_TABLE], AreaData.ID_FIELDS, AreaData.AREANAME_FIELDS, null);
-            //VillageDataBind();
-
-        }
         private void CustomerDataBind()
         {
             if (null == CustomerId)
@@ -92,7 +71,7 @@ namespace Powerson.Web.Controls
 
         //    CustomerDO customer = customerService.GetCustomerById(int.Parse(CustomerId) );
 
-        //    TextBox_companyname.Text = customer.CompanyName;
+            //TextBox_companyname.Text = customer;
         //    TextBox_www.Text = customer.Website;
         //    TextBox_contactman.Text = customer.ContactMan;
         //    TextBox_position.Text = customer.Position;
@@ -131,20 +110,20 @@ namespace Powerson.Web.Controls
                 CustomerDataBind();
             }
         }
-        public Customer getCustomerInfo()
+        public TdCustomerRequest getCustomerInfo()
         {
-            Customer ret = new Customer();
-            //ret.CompanyName = TextBox_companyname.Text;
-            //ret.Website = TextBox_www.Text;
-            //ret.ContactMan = TextBox_contactman.Text;
-            //ret.Tel = TextBox_tel.Text;
+            TdCustomerRequest ret = new TdCustomerRequest();
+            ret.name = TextBox_companyname.Text;
+            ret.web_site = TextBox_www.Text;
+            ret.contact_man = TextBox_contactman.Text;
+            ret.tel = TextBox_tel.Text.Trim();
             //ret.Extension = TextBox_extend.Text;
             //ret.Position = TextBox_position.Text;
-            //ret.Mobile = TextBox_moblie.Text;
-            //ret.Fax = TextBox_fax.Text;
-            //ret.Email = TextBox_email.Text;
+            ret.mobile = TextBox_moblie.Text.Trim();
+            ret.fax = TextBox_fax.Text.Trim();
+            ret.email = TextBox_email.Text.Trim();
             //ret.IndustryType = DropDownList_industryType.SelectedItem.Text;
-            //ret.BuyIntent = DropDownList_buyIntent.SelectedItem.Text;
+            ret.buy_intent = DropDownList_buyIntent.SelectedItem.Text;
             //if (DropDownList_visitType.SelectedIndex > 0)
             //{
             //    ret.VisitType = DropDownList_visitType.SelectedItem.Text;
@@ -189,17 +168,17 @@ namespace Powerson.Web.Controls
             TextBox_address.Text = "";
             TextBox_remark.Text = "";
         }
-        private void VillageDataBind()
-        {
-            DataSet ds = new DataSet();
-            //dataCommon.GetAllData(string.Format("SELECT * FROM _Village WHERE areaid={0}", DropDownList_area.SelectedValue), ds, VillageData._VILLAGE_TABLE);
-            //ListControlUtil.DataBind(DropDownList_village.Items, ds.Tables[VillageData._VILLAGE_TABLE], VillageData.ID_FIELDS, VillageData.VILLAGENAME_FIELDS, "<请选择...>");
-        }
+        //private void VillageDataBind()
+        //{
+        //    DataSet ds = new DataSet();
+        //    //dataCommon.GetAllData(string.Format("SELECT * FROM _Village WHERE areaid={0}", DropDownList_area.SelectedValue), ds, VillageData._VILLAGE_TABLE);
+        //    //ListControlUtil.DataBind(DropDownList_village.Items, ds.Tables[VillageData._VILLAGE_TABLE], VillageData.ID_FIELDS, VillageData.VILLAGENAME_FIELDS, "<请选择...>");
+        //}
 
-        protected void DropDownList_area_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VillageDataBind();
-        }
+        //protected void DropDownList_area_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    VillageDataBind();
+        //}
 
     }
 }

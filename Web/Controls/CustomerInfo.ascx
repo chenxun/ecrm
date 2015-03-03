@@ -1,6 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="CustomerInfo.ascx.cs"
     Inherits="Powerson.Web.Controls.CustomerInfo" %>
-<table cellspacing="1" cellpadding="1" width="100%" align="center" border="0">
+<table cellspacing="1" cellpadding="1" width="100%" style="vertical-align:middle" border="0">
     <tr>
         <td class="table_body" style="width: 20%">
             公司名称</td>
@@ -61,26 +61,27 @@
             行业类型
         </td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_industryType" runat="server" Width="155px" DataTextField="TypeName"
-                DataValueField="Id" DataSourceID="XmlDataSource_in">
+            <asp:DropDownList ID="DropDownList_industryType" runat="server" Width="155px" DataTextField="name"
+                DataValueField="id" DataSourceID="XmlDataSource_industry">
             </asp:DropDownList>
-            <asp:XmlDataSource ID="XmlDataSource_in" runat="server" DataFile="~/customer_dims.xml"
+            <asp:XmlDataSource ID="XmlDataSource_industry" runat="server" DataFile="~/customer_dims.xml"
                 XPath="//industry_type"></asp:XmlDataSource>
         </td>
         <td class="table_body" style="width: 20%">
             购买意向
         </td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_buyIntent" runat="server" Width="155px">
+            <asp:DropDownList ID="DropDownList_buyIntent" runat="server" Width="155px" DataSourceID="XmlDataSource_buy" DataTextField="name" DataValueField="id">
             </asp:DropDownList>
+            <asp:XmlDataSource ID="XmlDataSource_buy" runat="server" DataFile="~/customer_dims.xml"
+                XPath="//buy_intent"></asp:XmlDataSource>
         </td>
     </tr>
     <tr>
         <td class="table_body" style="width: 20%">
-            拜访类型
-        </td>
+            客户来源</td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_visitType" runat="server" Width="155px">
+            <asp:DropDownList ID="DropDownList_visitType" runat="server" Width="155px" DataSourceID="XmlDataSource_source" DataTextField="name" DataValueField="id">
                 <asp:ListItem Selected="True" Value="0">&lt;请选择...&gt;</asp:ListItem>
                 <asp:ListItem>客户介绍</asp:ListItem>
                 <asp:ListItem>自主开发</asp:ListItem>
@@ -90,13 +91,17 @@
                 <asp:ListItem>网址直接访问</asp:ListItem>
                 <asp:ListItem>其他搜索引擎</asp:ListItem>
             </asp:DropDownList>
+            <asp:XmlDataSource ID="XmlDataSource_source" runat="server" DataFile="~/customer_dims.xml"
+                XPath="//source"></asp:XmlDataSource>
         </td>
         <td class="table_body" style="width: 20%">
             客户成熟度
         </td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_customerRank" runat="server" Width="155px">
+            <asp:DropDownList ID="DropDownList_customerRank" runat="server" Width="155px" DataSourceID="XmlDataSource_rank" DataTextField="name" DataValueField="id">
             </asp:DropDownList>
+            <asp:XmlDataSource ID="XmlDataSource_rank" runat="server" DataFile="~/customer_dims.xml"
+                XPath="//rank"></asp:XmlDataSource>
         </td>
     </tr>
     <tr>

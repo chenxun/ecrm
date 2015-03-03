@@ -119,13 +119,13 @@ namespace Powerson.Web.Controls {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList_industryType;
         
         /// <summary>
-        /// XmlDataSource_in 控件。
+        /// XmlDataSource_industry 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.XmlDataSource XmlDataSource_in;
+        protected global::System.Web.UI.WebControls.XmlDataSource XmlDataSource_industry;
         
         /// <summary>
         /// DropDownList_buyIntent 控件。
@@ -137,6 +137,15 @@ namespace Powerson.Web.Controls {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList_buyIntent;
         
         /// <summary>
+        /// XmlDataSource_buy 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.XmlDataSource XmlDataSource_buy;
+        
+        /// <summary>
         /// DropDownList_visitType 控件。
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace Powerson.Web.Controls {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList_visitType;
         
         /// <summary>
+        /// XmlDataSource_source 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.XmlDataSource XmlDataSource_source;
+        
+        /// <summary>
         /// DropDownList_customerRank 控件。
         /// </summary>
         /// <remarks>
@@ -153,6 +171,15 @@ namespace Powerson.Web.Controls {
         /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownList_customerRank;
+        
+        /// <summary>
+        /// XmlDataSource_rank 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.XmlDataSource XmlDataSource_rank;
         
         /// <summary>
         /// TextBox_keyword 控件。
