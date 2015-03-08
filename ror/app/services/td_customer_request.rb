@@ -1,4 +1,5 @@
 class TdCustomerRequest < ActionWebService::Struct
+	member :id,					:int
 	member :name,				:string
 	member :user_id,			:int
 	member :web_site,			:string
