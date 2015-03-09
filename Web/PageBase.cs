@@ -54,6 +54,7 @@ namespace Powerson.Web
 			}
 			// 初始化用户服务对象 [9/23/2008]
             userService = new EcrmUserBinding();
+            customerService = new EcrmCustomerBinding();
             //this.userService = new UserService();
             //userService.ServiceDataCommon = this.dataCommon;
             //customerService = new CustomerService();

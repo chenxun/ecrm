@@ -29,7 +29,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ComponentArt.Web.UI, Version=2007.1.1566.3, Culture=neutral, PublicKeyToken=9bc9f846553156bb, processorArchitecture=MSIL" />
+    <Reference Include="ComponentArt.Web.UI, Version=2007.1.1566.2, Culture=neutral, PublicKeyToken=9bc9f846553156bb, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -58,6 +58,41 @@
   <ItemGroup>
     <Compile Include="AuthPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content.aspx.cs">
+      <DependentUpon>Content.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content.aspx.designer.cs">
+      <DependentUpon>Content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomerInfo.ascx.cs">
+      <DependentUpon>CustomerInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomerInfo.ascx.designer.cs">
+      <DependentUpon>CustomerInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FindCustomer.ascx.cs">
+      <DependentUpon>FindCustomer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\FindCustomer.ascx.designer.cs">
+      <DependentUpon>FindCustomer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VisitRecordInfo.ascx.cs">
+      <DependentUpon>VisitRecordInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\VisitRecordInfo.ascx.designer.cs">
+      <DependentUpon>VisitRecordInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_info.aspx.cs">
+      <DependentUpon>Customer_info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer_info.aspx.designer.cs">
+      <DependentUpon>Customer_info.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -97,7 +132,6 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ListControlUtil.cs" />
     <Compile Include="PageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -115,6 +149,16 @@
     <Compile Include="Timeout.aspx.designer.cs">
       <DependentUpon>Timeout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ValidateCode.aspx.cs">
+      <DependentUpon>ValidateCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ValidateCode.aspx.designer.cs">
+      <DependentUpon>ValidateCode.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Web References\RailsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,23 +170,46 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\RailsService\Customer.datasource">
+    <None Include="Web References\RailsService\Department.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\RailsService\ecrm.wsdl" />
+    <None Include="Web References\RailsService\Frame.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\RailsService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\RailsService\Role.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\RailsService\TdCustomerResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\RailsService\TdUserResult.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\RailsService\VisitPlan.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\RailsService\VisitRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <Content Include="Controls\VisitRecordInfo.ascx" />
+    <Content Include="customer_dims.xml" />
+    <Content Include="Content.aspx" />
+    <Content Include="Controls\CustomerInfo.ascx" />
+    <Content Include="Controls\FindCustomer.ascx" />
+    <Content Include="Controls\PickerAndCalendar.ascx" />
     <Content Include="css\calendarStyle.css" />
     <Content Include="css\dialog.css" />
     <Content Include="css\gridStyle.css" />
     <Content Include="css\planStyle.css" />
+    <Content Include="Customer_info.aspx" />
     <Content Include="Foot.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="ValidateCode.aspx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessFacade\BusinessFacade.csproj">
@@ -173,6 +240,9 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Powerson_Ecomma_Crm_Web_RailsService_ecrmService</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />
