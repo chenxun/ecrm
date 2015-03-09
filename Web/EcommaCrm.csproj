@@ -80,6 +80,13 @@
     <Compile Include="Controls\FindCustomer.ascx.designer.cs">
       <DependentUpon>FindCustomer.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FindPlan.ascx.cs">
+      <DependentUpon>FindPlan.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\FindPlan.ascx.designer.cs">
+      <DependentUpon>FindPlan.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VisitRecordInfo.ascx.cs">
       <DependentUpon>VisitRecordInfo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -93,6 +100,13 @@
     </Compile>
     <Compile Include="Customer_info.aspx.designer.cs">
       <DependentUpon>Customer_info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_manage.aspx.cs">
+      <DependentUpon>Customer_manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer_manage.aspx.designer.cs">
+      <DependentUpon>Customer_manage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -131,6 +145,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -196,6 +217,7 @@
     <None Include="Web References\RailsService\VisitRecord.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <Content Include="Controls\FindPlan.ascx" />
     <Content Include="Controls\VisitRecordInfo.ascx" />
     <Content Include="customer_dims.xml" />
     <Content Include="Content.aspx" />
@@ -207,8 +229,10 @@
     <Content Include="css\gridStyle.css" />
     <Content Include="css\planStyle.css" />
     <Content Include="Customer_info.aspx" />
+    <Content Include="Customer_manage.aspx" />
     <Content Include="Foot.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Logout.aspx" />
     <Content Include="ValidateCode.aspx" />
   </ItemGroup>
   <ItemGroup>

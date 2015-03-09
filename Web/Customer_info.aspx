@@ -59,7 +59,7 @@
                             Templates="(Collection)" ScrollRightLookId="TopLevelTabLook" ScrollLeftLookId="TopLevelTabLook"
                             ScrollUpLookId="TopLevelTabLook" DefaultGroupCssClass="TopGroup" DefaultItemLookId="TopLevelTabLook"
                             DefaultSelectedItemLookId="SelectedTopLevelTabLook" DefaultChildSelectedItemLookId="SelectedTopLevelTabLook"
-                            DefaultGroupTabSpacing="0px" Width="100%" ImagesBaseUrl="images/">
+                            DefaultGroupTabSpacing="0px" Width="100%" ImagesBaseUrl="images/" >
                             <ItemLooks>
                                 <ComponentArt:ItemLook HoverCssClass="TopLevelTabHover" LabelPaddingTop="4px" CssClass="TopLevelTab"
                                     LabelPaddingRight="15px" LabelPaddingBottom="4px" LeftIconVisibility="Always"
@@ -150,7 +150,7 @@
                                                 SliderHeight="20" PagerButtonHeight="22" PagerButtonWidth="41" PagerTextCssClass="GridFooterText"
                                                 GroupByTextCssClass="GroupByText" GroupByCssClass="GroupByCell" FooterCssClass="GridFooter"
                                                 HeaderCssClass="GridHeader" SearchTextCssClass="GridHeaderText" ShowHeader="false"
-                                                EditOnClickSelectedItem="False">
+                                                EditOnClickSelectedItem="False" OnItemDataBound="Grid_visitRecord_ItemDataBound">
                                                 <Levels>
                                                     <ComponentArt:GridLevel DataKeyField="Id" SelectedRowCssClass="SelectedRow" DataCellCssClass="DataCell"
                                                         HeadingTextCssClass="HeadingCellText" SortAscendingImageUrl="asc.gif" HeadingCellCssClass="HeadingCell"
@@ -160,8 +160,10 @@
                                                         <Columns>
                                                             <ComponentArt:GridColumn SortedDataCellCssClass="SortedDataCell" HeadingText="ID"
                                                                 Width="10" DataField="id" Visible="False"></ComponentArt:GridColumn>
+                                                            <ComponentArt:GridColumn SortedDataCellCssClass="SortedDataCell" HeadingText="user_id"
+                                                                DataField="user_id" Width="200" Visible="false"></ComponentArt:GridColumn>
                                                             <ComponentArt:GridColumn SortedDataCellCssClass="SortedDataCell" HeadingText="°Ý·ÃÈË"
-                                                                DataField="user_id" Width="200"></ComponentArt:GridColumn>
+                                                                DataField="user_name" Width="200"></ComponentArt:GridColumn>
                                                             <ComponentArt:GridColumn SortedDataCellCssClass="SortedDataCell" HeadingText="°Ý·ÃÀàÐÍ"
                                                                 DataField="title" Width="200"></ComponentArt:GridColumn>
                                                             <ComponentArt:GridColumn SortedDataCellCssClass="SortedDataCell" HeadingText="ÏêÏ¸ÄÚÈÝ"

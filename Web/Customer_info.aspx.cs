@@ -113,11 +113,12 @@ namespace Powerson.Web
             //    Button_apply.Visible = true;
             //    return;
             //}
+            int u = customerService.CustomerUserRelation(the_customer.id, me.id);
             if (me.id == the_customer.user_id)
                 Button_saveCustomer.Visible = true;
             //Button_add_rec.Visible = Button_saveCustomer.Visible;
             //Button_opensea.Visible = Button_saveCustomer.Visible;
-            //Button_saveRecord.Visible = Button_saveCustomer.Visible;
+            Button_saveRecord.Visible = Button_saveCustomer.Visible;
             //Button_newproj.Visible = Button_saveCustomer.Visible;
             //// 如果是客服和经理，可以创建订单 [7/26/2009]
             //if (BitUtil.BitAnd(me.RoleId, RoleService.ROLE_SUPPORT) || BitUtil.BitAnd(me.RoleId, RoleService.ROLE_MANAGER))
@@ -177,14 +178,8 @@ namespace Powerson.Web
         /// <param name="e"></param>
         protected void Button_saveCustomer_Click(object sender, System.EventArgs e)
         {
-            DataSet ds = new DataSet();
-            //dataCommon.GetAllData(string.Format("select * from _Customers where Id={0}", CustomerInfo_edit.CustomerId), ds, CustomersData._CUSTOMERS_TABLE);
-            //if (ds.Tables[0].Rows.Count.Equals(0))
-            //{
-            //    AddLoadMessage("更新客户信息失败");
-            //    return;
-            //}
-            DataRow dr = ds.Tables[0].Rows[0];
+            TdCustomerRequest request = CustomerInfo_edit.getCustomerInfo();
+            TdCustomerResult res = customerService.SaveCustomer(request);
             //CustomerDO customerNew = CustomerInfo_edit.getCustomerInfo();
             ////dr[CustomersData.COMPANYNAME_FIELDS] = customerNew.CompanyName;
             //dr[CustomersData.WEBSITE_FIELDS] = customerNew.Website;
@@ -209,7 +204,10 @@ namespace Powerson.Web
 
             //customerService.AddChangeHistory(CustomerInfo_edit.ChangeHistory);
             //HistoryDataBind();
-            AddLoadMessage("客户信息被成功保存");
+            if (res.result)
+                AddLoadMessage("客户信息被成功保存");
+            else
+                AddLoadMessage(res.msg);
         }
         /// <summary>
         /// 确认将客户扔进公海
@@ -419,6 +417,14 @@ namespace Powerson.Web
             
             AddLoadMessage("客户已成功的转移");
             CustomerDataBind();
+        }
+
+        protected void Grid_visitRecord_ItemDataBound(object sender, ComponentArt.Web.UI.GridItemDataBoundEventArgs e)
+        {
+            VisitRecord r = (VisitRecord)e.DataItem;
+            //TdUserResult u = userService.GetUserById(r.user_id);
+            //ComponentArt.Web.UI.GridItem item = new ComponentArt.Web.UI.GridItem(Grid_visitRecord,0,"mmm");
+            e.Item.ToArray()[2] = "www";
         }
     }
 }
