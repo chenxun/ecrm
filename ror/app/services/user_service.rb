@@ -45,4 +45,17 @@ class UserService < ActionWebService::Base
 	def get_roles_all
 		roles = Role.order('name').all
 	end
+	def is_boss(soldier_id, manager_id)
+		user = User.find(soldier_id)
+		return find_manager(user, manager_id)
+	end
+	def find_manager(user, manager_id)
+		if (user.manager_id.nil?)
+			return false
+		end
+		if (user.manager.id == manager_id)
+			return true
+		end
+		return find_manager(user.manager, manager_id)
+	end
 end
