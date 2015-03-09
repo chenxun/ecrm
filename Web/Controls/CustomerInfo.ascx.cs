@@ -18,7 +18,7 @@ namespace Powerson.Web.Controls
     public partial class CustomerInfo : UserControlBase
     {
         
-        protected Customer dataSource;
+        protected Customer customer;
         //HistoryDO[] changeHistory;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -62,37 +62,36 @@ namespace Powerson.Web.Controls
             RequiredFieldValidator_companyName.ValidationGroup = str_valGroup;
             RequiredFieldValidator_keyword.ValidationGroup = str_valGroup;
         }
-        private void CustomerDataBind()
+        public void CustomerDataBind(Customer customer)
         {
-            if (null == CustomerId)
+            if (null == customer)
                 return;
 
             BaseDataBind();
 
         //    CustomerDO customer = customerService.GetCustomerById(int.Parse(CustomerId) );
 
-            //TextBox_companyname.Text = customer;
-        //    TextBox_www.Text = customer.Website;
-        //    TextBox_contactman.Text = customer.ContactMan;
-        //    TextBox_position.Text = customer.Position;
-        //    TextBox_tel.Text = customer.Tel;
-        //    TextBox_extend.Text = customer.Extension;
-        //    TextBox_moblie.Text = customer.Mobile;
-        //    TextBox_fax.Text = customer.Fax;
-        //    TextBox_email.Text = customer.Email;
-        //    TextBox_keyword.Text = customer.Keywords;
+            TextBox_companyname.Text = customer.name;
+            TextBox_www.Text = customer.web_site;
+            TextBox_contactman.Text = customer.contact_man;
+            TextBox_position.Text = customer.position;
+            TextBox_tel.Text = customer.tel;
+            TextBox_extend.Text = customer.ext;
+            TextBox_moblie.Text = customer.mobile;
+            TextBox_fax.Text = customer.fax;
+            TextBox_email.Text = customer.email;
+            TextBox_keyword.Text = customer.keywords;
 
-        //    ListControlUtil.FocusItemByText(DropDownList_industryType, customer.IndustryType);
-
-        //    ListControlUtil.FocusItemByText( DropDownList_buyIntent, customer.BuyIntent);
-        //    ListControlUtil.FocusItemByValue( DropDownList_customerRank, customer.RankId.ToString());
-        //    ListControlUtil.FocusItemByText( DropDownList_area, customer.Area);
-        //    ListControlUtil.FocusItemByText(DropDownList_visitType, customer.VisitType);
+            FocusItemByText(DropDownList_industryType, customer.industry_type);
+            FocusItemByText(DropDownList_buyIntent, customer.buy_intent);
+            FocusItemByValue(DropDownList_customerRank, customer.rank_id.ToString());
+            FocusItemByText(DropDownList_area, customer.area);
+            FocusItemByText(DropDownList_visitType, customer.source);
         //    VillageDataBind();
         //    ListControlUtil.FocusItemByText(DropDownList_village, customer.Village);
 
-        //    TextBox_address.Text = customer.Address;
-        //    TextBox_remark.Text = customer.Remark;
+            TextBox_address.Text = customer.address;
+            TextBox_remark.Text = customer.remark;
 
         //    ViewState[CustomersData.RANKID_FIELDS] = DropDownList_customerRank.SelectedItem.Text;
         }
@@ -107,7 +106,7 @@ namespace Powerson.Web.Controls
             set
             {
                 ViewState["CustomerId"] = value;
-                CustomerDataBind();
+                //CustomerDataBind();
             }
         }
         public TdCustomerRequest getCustomerInfo()
@@ -117,26 +116,27 @@ namespace Powerson.Web.Controls
             ret.web_site = TextBox_www.Text;
             ret.contact_man = TextBox_contactman.Text;
             ret.tel = TextBox_tel.Text.Trim();
-            //ret.Extension = TextBox_extend.Text;
-            //ret.Position = TextBox_position.Text;
+            ret.ext = TextBox_extend.Text;
+            ret.position = TextBox_position.Text;
             ret.mobile = TextBox_moblie.Text.Trim();
             ret.fax = TextBox_fax.Text.Trim();
             ret.email = TextBox_email.Text.Trim();
-            //ret.IndustryType = DropDownList_industryType.SelectedItem.Text;
+            ret.industry_type = DropDownList_industryType.SelectedItem.Text;
             ret.buy_intent = DropDownList_buyIntent.SelectedItem.Text;
+            ret.source = DropDownList_visitType.SelectedItem.Text;
             //if (DropDownList_visitType.SelectedIndex > 0)
             //{
             //    ret.VisitType = DropDownList_visitType.SelectedItem.Text;
             //}
-            //ret.RankId = int.Parse(DropDownList_customerRank.SelectedValue);
-            //ret.Area = DropDownList_area.SelectedItem.Text;
+            ret.rank_id = int.Parse(DropDownList_customerRank.SelectedValue);
+            ret.area = DropDownList_area.SelectedItem.Text;
             //if (DropDownList_village.SelectedIndex > 0)
             //{
             //    ret.Village = DropDownList_village.SelectedItem.Text;
             //}
-            //ret.Address = TextBox_address.Text;
-            //ret.Remark = TextBox_remark.Text;
-            //ret.Keywords = TextBox_keyword.Text;
+            ret.address = TextBox_address.Text;
+            ret.remark = TextBox_remark.Text;
+            ret.keywords = TextBox_keyword.Text;
 
             //if (CtrlAction == CommandNameType.EDIT)
             //{

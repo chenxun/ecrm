@@ -8,7 +8,7 @@
         <td class="table_none" style="width: 70%">
             <asp:DropDownList ID="DropDownList_type" runat="server" Width="155" DataSourceID="XmlDataSource_type" DataTextField="name" DataValueField="id">
             </asp:DropDownList>
-            <asp:XmlDataSource ID="XmlDataSource_type" runat="server" ></asp:XmlDataSource>
+            <asp:XmlDataSource ID="XmlDataSource_type" runat="server" DataFile="~/customer_dims.xml" XPath="//visit_type" ></asp:XmlDataSource>
         </td>
     </tr>
     <tr>

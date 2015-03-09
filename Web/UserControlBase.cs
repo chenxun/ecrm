@@ -73,6 +73,30 @@ namespace Powerson.Web
             return (ComponentArt.Web.UI.Calendar)p_ctrl.FindControl("Picker1");
         }
         /// <summary>
+        /// 根据控件Item的Text，定位到相应的Item
+        /// </summary>
+        /// <param name="p_control">用于定位Item的下拉菜单</param>
+        /// <param name="p_text">需要定位的Item的Text</param>
+        protected void FocusItemByText(ListControl p_control, string p_text)
+        {
+            p_control.ClearSelection();
+            ListItem item = p_control.Items.FindByText(p_text);
+            if (null != item)
+                item.Selected = true;
+        }
+        /// <summary>
+        /// 根据控件Item的Value，定位到相应的Item
+        /// </summary>
+        /// <param name="p_control">用于定位Item的下拉菜单</param>
+        /// <param name="p_value">需要定位的Item的value</param>
+        protected void FocusItemByValue(ListControl p_control, string p_value)
+        {
+            p_control.ClearSelection();
+            ListItem item = p_control.Items.FindByValue(p_value);
+            if (null != item)
+                item.Selected = true;
+        }
+        /// <summary>
         /// 判断用户控件是不是第一次load
         /// </summary>
         protected bool IsFirstLoad

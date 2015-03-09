@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Data;
 using System.Configuration;
 using System.Collections;
@@ -9,62 +9,78 @@ using System.Web.UI.HtmlControls;
 using Powerson.Framework;
 using Powerson.BusinessFacade;
 using Powerson.DataAccess;
+using Powerson.Web.RailsService;
 
 namespace Powerson.Web
 {
     public partial class Customer_info : AuthPageBase
     {
+        Customer the_customer;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
             {
+                BuildCustomer();
                 CustomerDataBind();
             }
 
         }
         /// <summary>
-        /// ÏÔÊ¾¿Í»§µÄ»ù±¾Êı¾İ
+        /// æ˜¾ç¤ºå®¢æˆ·çš„åŸºæœ¬æ•°æ®
         /// </summary>
         void CustomerDataBind()
         {
             //this.form1.
-            string str_id = GetQueryString("id");
-            if (str_id == null)
-            {
-                AddLoadMessage("Ã»ÓĞÕÒµ½¿Í»§ĞÅÏ¢");
+            if (the_customer == null)
                 return;
-            }
-            CustomerInfo_edit.CustomerId = str_id;
+            CustomerInfo_edit.CustomerDataBind(the_customer);
+            //CustomerInfo_edit.CustomerId = str_id;
 
             //this.thistitle.Text = CustomerInfo_edit.getCustomerInfo().CompanyName;
             
-            // ¼ì²é°´Å¥ÊÇ·ñÏÔÊ¾ [5/27/2009]
+            // æ£€æŸ¥æŒ‰é’®æ˜¯å¦æ˜¾ç¤º [5/27/2009]
             CheckButton();
 
-            VisitRecordDataBind();
-            HistoryDataBind();
-            OrderDataBind();
-            NewProjectDataBind();
+            VisitRecordDataBind(the_customer.id);
+            //HistoryDataBind();
+            //OrderDataBind();
+            //NewProjectDataBind();
 
-            // ÏÔÊ¾ÉÏ´ÎµÄ°İ·Ã¼Æ»® [5/24/2009]
+            // æ˜¾ç¤ºä¸Šæ¬¡çš„æ‹œè®¿è®¡åˆ’ [5/24/2009]
             FindPicker(PickerAndCalendar_addVisitRecord_nextVisit).SelectedDate = DateTime.Now.AddDays(1);
             FindPicker(PickerAndCalendar_newproject).SelectedDate = DateTime.Now.AddDays(7);
             TextBox_addVisit_nextVisit.Text = "";
-            // ÕâÀïÒªÏÔÊ¾ÒÔÇ°µÄ°İ·Ã¼Æ»®µÄ [3/5/2009]
+            // è¿™é‡Œè¦æ˜¾ç¤ºä»¥å‰çš„æ‹œè®¿è®¡åˆ’çš„ [3/5/2009]
             DataSet ds = new DataSet();
             //dataCommon.GetAllData(string.Format("select * from _VisitPlan where CustomerId={0} and PlanType=1 and PlanStatus='{1}' order by Id desc", CustomerInfo_edit.CustomerId, CustomerService.PLANSTATUS_PENDING), ds, VisitPlanData._VISITPLAN_TABLE);
             //if (ds.Tables[VisitPlanData._VISITPLAN_TABLE].Rows.Count == 0)
             //{
-            //    Label_visitPlan.Text = "ÔİÊ±Ã»ÓĞ¸ú½ø¼Æ»®";
+            //    Label_visitPlan.Text = "æš‚æ—¶æ²¡æœ‰è·Ÿè¿›è®¡åˆ’";
             //}
             //else
             //{
             //    DataRow dr = ds.Tables[VisitPlanData._VISITPLAN_TABLE].Rows[0];
-            //    Label_visitPlan.Text = string.Format("Äú¼Æ»®ÔÚ {0} ¸ú½ø¸Ã¿Í»§£¬Çë×¢ÒâÒÔÏÂĞÅÏ¢£º<br>{1}", Convert.ToDateTime(dr[VisitPlanData.VISITPLANDATE_FIELDS]).ToShortDateString(), dr[VisitPlanData.REMARK_FIELDS]);
+            //    Label_visitPlan.Text = string.Format("æ‚¨è®¡åˆ’åœ¨ {0} è·Ÿè¿›è¯¥å®¢æˆ·ï¼Œè¯·æ³¨æ„ä»¥ä¸‹ä¿¡æ¯ï¼š<br>{1}", Convert.ToDateTime(dr[VisitPlanData.VISITPLANDATE_FIELDS]).ToShortDateString(), dr[VisitPlanData.REMARK_FIELDS]);
             //}
         }
+
+        private void BuildCustomer()
+        {
+            string str_id = GetQueryString("id");
+            if (str_id == null)
+            {
+                return;
+            }
+            TdCustomerResult res = customerService.GetCustomerById(int.Parse(str_id));
+            if (!res.result)
+            {
+                AddLoadMessage(res.msg);
+                return;
+            }
+            the_customer = res.customers[0];
+        }
         /// <summary>
-        /// ¸ù¾İ¿Í»§×´Ì¬£¬¼ì²é¸÷¸ö°´Å¥
+        /// æ ¹æ®å®¢æˆ·çŠ¶æ€ï¼Œæ£€æŸ¥å„ä¸ªæŒ‰é’®
         /// </summary>
         void CheckButton()
         {
@@ -79,7 +95,7 @@ namespace Powerson.Web
             //UserDO me = LoginSession.GetCurrentUser(this);
 
             //if (BitUtil.BitAnd(me.RoleId, RoleService.ROLE_MANAGER))
-            //    Button_shift.Visible = true;// Ö»ÓĞ¾­Àí¿ÉÒÔ×ªÒÆ¿Í»§ [8/5/2009]
+            //    Button_shift.Visible = true;// åªæœ‰ç»ç†å¯ä»¥è½¬ç§»å®¢æˆ· [8/5/2009]
 
             //string c_id = GetQueryString("id");
             //CustomerDO cus = customerService.GetCustomerById(int.Parse(c_id));
@@ -88,7 +104,7 @@ namespace Powerson.Web
 
             //if (cus.InOpenSea == 2)
             //{
-            //    // ÅĞ¶ÏÊÇ²»ÊÇ×Ô¼ºÈÓµÄ£¬Èç¹ûÊÇ£¬²»×¼¼ñ [5/28/2009]
+            //    // åˆ¤æ–­æ˜¯ä¸æ˜¯è‡ªå·±æ‰”çš„ï¼Œå¦‚æœæ˜¯ï¼Œä¸å‡†æ¡ [5/28/2009]
             //    bool b_ismine = false;
             //    if (cus.UserId == me.PersonId)
             //        b_ismine = true;
@@ -97,12 +113,14 @@ namespace Powerson.Web
             //    Button_apply.Visible = true;
             //    return;
             //}
-            //Button_saveCustomer.Visible = customerService.CanEditCustomer(c_id, me);
+            int u = customerService.CustomerUserRelation(the_customer.id, me.id);
+            if (me.id == the_customer.user_id)
+                Button_saveCustomer.Visible = true;
             //Button_add_rec.Visible = Button_saveCustomer.Visible;
             //Button_opensea.Visible = Button_saveCustomer.Visible;
-            //Button_saveRecord.Visible = Button_saveCustomer.Visible;
+            Button_saveRecord.Visible = Button_saveCustomer.Visible;
             //Button_newproj.Visible = Button_saveCustomer.Visible;
-            //// Èç¹ûÊÇ¿Í·şºÍ¾­Àí£¬¿ÉÒÔ´´½¨¶©µ¥ [7/26/2009]
+            //// å¦‚æœæ˜¯å®¢æœå’Œç»ç†ï¼Œå¯ä»¥åˆ›å»ºè®¢å• [7/26/2009]
             //if (BitUtil.BitAnd(me.RoleId, RoleService.ROLE_SUPPORT) || BitUtil.BitAnd(me.RoleId, RoleService.ROLE_MANAGER))
             //{
             //    Button_newOrder.Visible = true;
@@ -114,18 +132,17 @@ namespace Powerson.Web
             return;
         }
         /// <summary>
-        /// ÏÔÊ¾¿Í»§µÄ°İ·Ã¼ÇÂ¼ÁĞ±í
+        /// æ˜¾ç¤ºå®¢æˆ·çš„æ‹œè®¿è®°å½•åˆ—è¡¨
         /// </summary>
-        void VisitRecordDataBind()
+        void VisitRecordDataBind(int customer_id)
         {
-            DataSet ds = new DataSet();
-            //dataCommon.GetAllData(string.Format("select V.*,P.Name from _VisitRecord V,_PersonalInfo P where V.PersonId=P.Id and V.CustomerId={0} order by V.VisitDate desc", CustomerInfo_edit.CustomerId), ds, VisitRecordData._VISITRECORD_TABLE);
+            VisitRecord[] res = customerService.GetVisitRecordsByCustomer(customer_id);
 
-            //Grid_visitRecord.DataSource = ds.Tables[VisitRecordData._VISITRECORD_TABLE];
-            //Grid_visitRecord.DataBind();
+            Grid_visitRecord.DataSource = res;
+            Grid_visitRecord.DataBind();
         }
         /// <summary>
-        /// ÏÔÊ¾¿Í»§µÄÀúÊ·±ä¸ü¼ÇÂ¼
+        /// æ˜¾ç¤ºå®¢æˆ·çš„å†å²å˜æ›´è®°å½•
         /// </summary>
         void HistoryDataBind()
         {
@@ -135,7 +152,7 @@ namespace Powerson.Web
             //Grid_history.DataBind();
         }
         /// <summary>
-        /// ÏÔÊ¾Õâ¸ö¿Í»§ÒÑ¾­Ç©µÄ¶©µ¥
+        /// æ˜¾ç¤ºè¿™ä¸ªå®¢æˆ·å·²ç»ç­¾çš„è®¢å•
         /// </summary>
         void OrderDataBind()
         {
@@ -145,7 +162,7 @@ namespace Powerson.Web
             //GridView_order.DataBind();
         }
         /// <summary>
-        /// ÏÔÊ¾Õâ¸ö¿Í»§²úÉúµÄĞÂÏîÄ¿ÒâÏò
+        /// æ˜¾ç¤ºè¿™ä¸ªå®¢æˆ·äº§ç”Ÿçš„æ–°é¡¹ç›®æ„å‘
         /// </summary>
         void NewProjectDataBind()
         {
@@ -155,20 +172,14 @@ namespace Powerson.Web
             //GridView_newproj.DataBind();
         }
         /// <summary>
-        /// ±£´æ¿Í»§µÄ»ù±¾ĞÅÏ¢
+        /// ä¿å­˜å®¢æˆ·çš„åŸºæœ¬ä¿¡æ¯
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Button_saveCustomer_Click(object sender, System.EventArgs e)
         {
-            DataSet ds = new DataSet();
-            //dataCommon.GetAllData(string.Format("select * from _Customers where Id={0}", CustomerInfo_edit.CustomerId), ds, CustomersData._CUSTOMERS_TABLE);
-            //if (ds.Tables[0].Rows.Count.Equals(0))
-            //{
-            //    AddLoadMessage("¸üĞÂ¿Í»§ĞÅÏ¢Ê§°Ü");
-            //    return;
-            //}
-            DataRow dr = ds.Tables[0].Rows[0];
+            TdCustomerRequest request = CustomerInfo_edit.getCustomerInfo();
+            TdCustomerResult res = customerService.SaveCustomer(request);
             //CustomerDO customerNew = CustomerInfo_edit.getCustomerInfo();
             ////dr[CustomersData.COMPANYNAME_FIELDS] = customerNew.CompanyName;
             //dr[CustomersData.WEBSITE_FIELDS] = customerNew.Website;
@@ -193,10 +204,13 @@ namespace Powerson.Web
 
             //customerService.AddChangeHistory(CustomerInfo_edit.ChangeHistory);
             //HistoryDataBind();
-            AddLoadMessage("¿Í»§ĞÅÏ¢±»³É¹¦±£´æ");
+            if (res.result)
+                AddLoadMessage("å®¢æˆ·ä¿¡æ¯è¢«æˆåŠŸä¿å­˜");
+            else
+                AddLoadMessage(res.msg);
         }
         /// <summary>
-        /// È·ÈÏ½«¿Í»§ÈÓ½ø¹«º£
+        /// ç¡®è®¤å°†å®¢æˆ·æ‰”è¿›å…¬æµ·
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -208,23 +222,23 @@ namespace Powerson.Web
 
             //DataRow dr = ds.Tables[CustomersData._CUSTOMERS_TABLE].Rows[0];
             //dr[CustomersData.INOPENSEA_FIELDS] = 2;
-            //dr[CustomersData.REMARK_FIELDS] = string.Format("----ÕâÊÇÈÓ½ø¹«º£µÄÔ­Òò----\r\n{0}\r\n-----------end----------\r\n{1}", TextBox_opensea_reason.Text,  dr[CustomersData.REMARK_FIELDS]);
+            //dr[CustomersData.REMARK_FIELDS] = string.Format("----è¿™æ˜¯æ‰”è¿›å…¬æµ·çš„åŸå› ----\r\n{0}\r\n-----------end----------\r\n{1}", TextBox_opensea_reason.Text,  dr[CustomersData.REMARK_FIELDS]);
             //dataCommon.UpdateData(ds);
-            //// Ìí¼ÓÒ»ÌõÀúÊ·¼ÇÂ¼ [3/10/2009]
+            //// æ·»åŠ ä¸€æ¡å†å²è®°å½• [3/10/2009]
             //HistoryDO openseaHis = new HistoryDO();
             //openseaHis.ChangeDate = DateTime.Now;
-            //openseaHis.ColumnName = "¹«º£";
+            //openseaHis.ColumnName = "å…¬æµ·";
             //openseaHis.CustomerId = int.Parse(CustomerInfo_edit.CustomerId);
-            //openseaHis.NewValue = "½øÈë¹«º£";
-            //openseaHis.OldValue = "ÏúÊÛË½ÓĞ";
+            //openseaHis.NewValue = "è¿›å…¥å…¬æµ·";
+            //openseaHis.OldValue = "é”€å”®ç§æœ‰";
             //openseaHis.PersonName = LoginSession.GetCurrentUser(this.Page).RealName;
             //customerService.AddChangeHistory(new HistoryDO[1] { openseaHis });
 
-            AddLoadMessage("ÄúÒÑ¾­°Ñ¸Ã¿Í»§ÈÓ½ø¹«º£");
+            AddLoadMessage("æ‚¨å·²ç»æŠŠè¯¥å®¢æˆ·æ‰”è¿›å…¬æµ·");
             CustomerDataBind();
         }
         /// <summary>
-        /// ĞÂÔöÒ»Ìõ°İ·Ã¼ÇÂ¼
+        /// æ–°å¢ä¸€æ¡æ‹œè®¿è®°å½•
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -235,7 +249,7 @@ namespace Powerson.Web
             //dataCommon.GetAllData("select top 1 * from _VisitRecord", ds, VisitRecordData._VISITRECORD_TABLE);
             //dataCommon.GetAllData(string.Format("select * from _VisitPlan where CustomerId={0} and PlanType=1 and PlanStatus='{1}'", CustomerInfo_edit.CustomerId, CustomerService.PLANSTATUS_PENDING), ds, VisitPlanData._VISITPLAN_TABLE);
 
-            //// ĞŞ¸Ä¿Í»§µÄ×î½ü·ÃÎÊĞÅÏ¢ [3/10/2009]
+            //// ä¿®æ”¹å®¢æˆ·çš„æœ€è¿‘è®¿é—®ä¿¡æ¯ [3/10/2009]
             //DataRow dr_customer = ds.Tables[CustomersData._CUSTOMERS_TABLE].Rows[0];
             //dr_customer[CustomersData.LASTVISITDATE_FIELDS] = DateTime.Now;
             //dr_customer[CustomersData.LASTVISITINFO_FIELDS] = VisitRecordInfo_addVisit.Remark;
@@ -262,13 +276,13 @@ namespace Powerson.Web
             //ds.Tables[VisitPlanData._VISITPLAN_TABLE].Rows.Add(dr_plan);
 
             //dataCommon.UpdateData(ds);
-            //AddLoadMessage("Äú³É¹¦Ìí¼ÓÁË°İ·Ã¼ÇÂ¼");
+            //AddLoadMessage("æ‚¨æˆåŠŸæ·»åŠ äº†æ‹œè®¿è®°å½•");
 
             VisitRecordInfo_addVisit.Cleanup();
             CustomerDataBind();
         }
         /// <summary>
-        /// µã»÷±£´æ°İ·Ã¼ÇÂ¼°´Å¥
+        /// ç‚¹å‡»ä¿å­˜æ‹œè®¿è®°å½•æŒ‰é’®
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -284,12 +298,12 @@ namespace Powerson.Web
             //dr[VisitRecordData.VISITDATE_FIELDS] = VisitRecordInfo_editVisitRecord.VisitDate;
 
             dataCommon.UpdateData(ds);
-            VisitRecordDataBind();
-            AddLoadMessage("Äú³É¹¦±£´æÁË°İ·Ã¼ÇÂ¼");
+            //VisitRecordDataBind();
+            AddLoadMessage("æ‚¨æˆåŠŸä¿å­˜äº†æ‹œè®¿è®°å½•");
 
         }
         /// <summary>
-        /// µ±ÓÃ»§Ë«»÷°İ·Ã¼ÇÂ¼Ê±£¬Òì²½ÏÔÊ¾Êı¾İ
+        /// å½“ç”¨æˆ·åŒå‡»æ‹œè®¿è®°å½•æ—¶ï¼Œå¼‚æ­¥æ˜¾ç¤ºæ•°æ®
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -300,7 +314,7 @@ namespace Powerson.Web
             VisitRecordInfo_editVisitRecord.RenderControl(e.Output);
         }
         /// <summary>
-        /// Ìí¼ÓĞÂµÄÏîÄ¿ÒâÏò
+        /// æ·»åŠ æ–°çš„é¡¹ç›®æ„å‘
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -317,11 +331,11 @@ namespace Powerson.Web
             //dr[VisitPlanData.VISITPLANDATE_FIELDS] = FindPicker(PickerAndCalendar_newproject).SelectedDate;
             //ds.Tables[VisitPlanData._VISITPLAN_TABLE].Rows.Add(dr);
             //dataCommon.UpdateData(ds);
-            AddLoadMessage("³É¹¦µÄÌí¼ÓÁËĞÂÏîÄ¿ÒâÏò");
+            AddLoadMessage("æˆåŠŸçš„æ·»åŠ äº†æ–°é¡¹ç›®æ„å‘");
             NewProjectDataBind();
         }
         /// <summary>
-        /// ÏúÊÛÈËÔ±×Ô¼º´Ó¹«º£ÖĞÈÏÁì¿Í»§
+        /// é”€å”®äººå‘˜è‡ªå·±ä»å…¬æµ·ä¸­è®¤é¢†å®¢æˆ·
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -338,14 +352,14 @@ namespace Powerson.Web
 
             //HistoryDO openseaHis = new HistoryDO();
             //openseaHis.ChangeDate = DateTime.Now;
-            //openseaHis.ColumnName = "¹«º£";
+            //openseaHis.ColumnName = "å…¬æµ·";
             //openseaHis.CustomerId = int.Parse(CustomerInfo_edit.CustomerId);
-            //openseaHis.NewValue = "ÏúÊÛÈÏÁì";
-            //openseaHis.OldValue = "ÔÚ¹«º£ÖĞ";
+            //openseaHis.NewValue = "é”€å”®è®¤é¢†";
+            //openseaHis.OldValue = "åœ¨å…¬æµ·ä¸­";
             //openseaHis.PersonName = LoginSession.GetCurrentUser(this.Page).RealName;
             //customerService.AddChangeHistory(new HistoryDO[1] { openseaHis });
 
-            AddLoadMessage("Äú³É¹¦µÄÈÏÁìÁË´Ë¿Í»§");
+            AddLoadMessage("æ‚¨æˆåŠŸçš„è®¤é¢†äº†æ­¤å®¢æˆ·");
             CustomerDataBind();
         }
         /// <summary>
@@ -362,7 +376,7 @@ namespace Powerson.Web
             //order.CustomerId = cus.Id;
             //order.UserId = cus.UserId;
             //orderService.CreateOrder(order);
-            AddLoadMessage("¶©µ¥ÒÑ³É¹¦´´½¨");
+            AddLoadMessage("è®¢å•å·²æˆåŠŸåˆ›å»º");
             OrderDataBind();
         }
         protected void Callback_neworder_Callback(object sender, ComponentArt.Web.UI.CallBackEventArgs e)
@@ -382,14 +396,14 @@ namespace Powerson.Web
             //dataCommon.GetAllData(string.Format("select * from _Customers where Id={0}", CustomerInfo_edit.CustomerId), ds, CustomersData._CUSTOMERS_TABLE);
             if (ds.Tables[0].Rows.Count.Equals(0))
             {
-                AddLoadMessage("¸üĞÂ¿Í»§ĞÅÏ¢Ê§°Ü");
+                AddLoadMessage("æ›´æ–°å®¢æˆ·ä¿¡æ¯å¤±è´¥");
                 return;
             }
 
             //CustomerDO cus = customerService.GetCustomerById(int.Parse(CustomerInfo_edit.CustomerId));
             //HistoryDO openseaHis = new HistoryDO();
             //openseaHis.ChangeDate = DateTime.Now;
-            //openseaHis.ColumnName = "ÏúÊÛ";
+            //openseaHis.ColumnName = "é”€å”®";
             //openseaHis.CustomerId = int.Parse(CustomerInfo_edit.CustomerId);
             //openseaHis.NewValue = SalesList_shift.SalesName;
             //openseaHis.OldValue = userService.GetPersonName( cus.UserId);
@@ -401,8 +415,16 @@ namespace Powerson.Web
             //dr[CustomersData.INOPENSEA_FIELDS] = 0;
             //dataCommon.UpdateData(ds);
             
-            AddLoadMessage("¿Í»§ÒÑ³É¹¦µÄ×ªÒÆ");
+            AddLoadMessage("å®¢æˆ·å·²æˆåŠŸçš„è½¬ç§»");
             CustomerDataBind();
+        }
+
+        protected void Grid_visitRecord_ItemDataBound(object sender, ComponentArt.Web.UI.GridItemDataBoundEventArgs e)
+        {
+            VisitRecord r = (VisitRecord)e.DataItem;
+            //TdUserResult u = userService.GetUserById(r.user_id);
+            //ComponentArt.Web.UI.GridItem item = new ComponentArt.Web.UI.GridItem(Grid_visitRecord,0,"mmm");
+            e.Item.ToArray()[2] = "www";
         }
     }
 }

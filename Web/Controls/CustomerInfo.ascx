@@ -1,6 +1,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="CustomerInfo.ascx.cs"
     Inherits="Powerson.Web.Controls.CustomerInfo" %>
-<table cellspacing="1" cellpadding="1" width="100%" style="vertical-align:middle" border="0">
+<table cellspacing="1" cellpadding="1" width="100%" style="vertical-align: middle"
+    border="0">
     <tr>
         <td class="table_body" style="width: 20%">
             公司名称</td>
@@ -71,7 +72,8 @@
             购买意向
         </td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_buyIntent" runat="server" Width="155px" DataSourceID="XmlDataSource_buy" DataTextField="name" DataValueField="id">
+            <asp:DropDownList ID="DropDownList_buyIntent" runat="server" Width="155px" DataSourceID="XmlDataSource_buy"
+                DataTextField="name" DataValueField="id">
             </asp:DropDownList>
             <asp:XmlDataSource ID="XmlDataSource_buy" runat="server" DataFile="~/customer_dims.xml"
                 XPath="//buy_intent"></asp:XmlDataSource>
@@ -81,15 +83,8 @@
         <td class="table_body" style="width: 20%">
             客户来源</td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_visitType" runat="server" Width="155px" DataSourceID="XmlDataSource_source" DataTextField="name" DataValueField="id">
-                <asp:ListItem Selected="True" Value="0">&lt;请选择...&gt;</asp:ListItem>
-                <asp:ListItem>客户介绍</asp:ListItem>
-                <asp:ListItem>自主开发</asp:ListItem>
-                <asp:ListItem>来电咨询客户</asp:ListItem>
-                <asp:ListItem>百度</asp:ListItem>
-                <asp:ListItem>谷歌</asp:ListItem>
-                <asp:ListItem>网址直接访问</asp:ListItem>
-                <asp:ListItem>其他搜索引擎</asp:ListItem>
+            <asp:DropDownList ID="DropDownList_visitType" runat="server" Width="155px" DataSourceID="XmlDataSource_source"
+                DataTextField="name" DataValueField="id">
             </asp:DropDownList>
             <asp:XmlDataSource ID="XmlDataSource_source" runat="server" DataFile="~/customer_dims.xml"
                 XPath="//source"></asp:XmlDataSource>
@@ -98,7 +93,8 @@
             客户成熟度
         </td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_customerRank" runat="server" Width="155px" DataSourceID="XmlDataSource_rank" DataTextField="name" DataValueField="id">
+            <asp:DropDownList ID="DropDownList_customerRank" runat="server" Width="155px" DataSourceID="XmlDataSource_rank"
+                DataTextField="name" DataValueField="id">
             </asp:DropDownList>
             <asp:XmlDataSource ID="XmlDataSource_rank" runat="server" DataFile="~/customer_dims.xml"
                 XPath="//rank"></asp:XmlDataSource>
@@ -114,8 +110,8 @@
         <td class="table_body" style="width: 20%">
             所属省(市)区</td>
         <td class="table_none" style="width: 30%">
-            <asp:DropDownList ID="DropDownList_area" runat="server" Width="155px"
-                OnSelectedIndexChanged="DropDownList_area_SelectedIndexChanged" DataSourceID="XmlDataSource_areas" DataTextField="name" DataValueField="id">
+            <asp:DropDownList ID="DropDownList_area" runat="server" Width="155px" DataSourceID="XmlDataSource_areas"
+                DataTextField="name" DataValueField="id">
             </asp:DropDownList><asp:XmlDataSource ID="XmlDataSource_areas" runat="server" DataFile="~/customer_dims.xml"
                 XPath="//area"></asp:XmlDataSource>
         </td>
@@ -125,7 +121,7 @@
             公司具体地址
         </td>
         <td class="table_none" colspan="3">
-            <asp:TextBox ID="TextBox_address" runat="server" Width="62.5%"></asp:TextBox>
+            <asp:TextBox ID="TextBox_address" runat="server" ></asp:TextBox>
         </td>
     </tr>
     <tr>
@@ -134,7 +130,7 @@
         </td>
         <td class="table_none" colspan="3">
             <asp:TextBox ID="TextBox_remark" runat="server" Height="80px" TextMode="MultiLine"
-                Width="62.5%"></asp:TextBox>
+               ></asp:TextBox>
         </td>
     </tr>
 </table>

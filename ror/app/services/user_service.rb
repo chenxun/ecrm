@@ -3,11 +3,11 @@ class UserService < ActionWebService::Base
 
 	def add_user(user_request)
 		user = User.new
-		user.user_name = user_request.user_name
+		user.name = user_request.user_name
 		user.password = user_request.password
 		#user
 		begin
-			user.save
+			user.save!
 		rescue Exception => e
 			return TdUserResult.new(:result => false, :msg => e, :users => nil)
 		end
