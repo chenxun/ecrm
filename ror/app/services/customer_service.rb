@@ -8,17 +8,17 @@ class CustomerService < ActionWebService::Base
 		begin
 			c.save
 		rescue Exception => e
-			return TdCustomerResult.new(:result => false, :msg => e, :customers => nil)
+			return TdCustomerResult.new(:result => false, :msg => e)
 		end
-		return TdCustomerResult.new(:result => true, :msg => nil, :customers => [c])
+		return TdCustomerResult.new(:result => true, :customer => c)
 	end
 	def get_customer_by_id(customer_id)
 		begin
 			c = Customer.find(customer_id)
 		rescue Exception => e
-			return TdCustomerResult.new(:result => false, :msg => e, :customers => nil)
+			return TdCustomerResult.new(:result => false, :msg => e)
 		end
-		return TdCustomerResult.new(:result => true, :msg => '', :customers => [c])
+		return TdCustomerResult.new(:result => true, :customer => c)
 	end
 	def get_visit_records_by_customer(customer_id)
 		c = Customer.includes(:visit_records).find(customer_id)
@@ -31,29 +31,9 @@ class CustomerService < ActionWebService::Base
 			c.save
 			# 当客户的负责人发生变化...
 		rescue Exception => e
-			return TdCustomerResult.new(:result => false, :msg => e, :customers => nil)
+			return TdCustomerResult.new(:result => false, :msg => e)
 		end
-		TdCustomerResult.new(:result => true, :msg => '', :customers => [c])
-	end
-	def customer_user_relation(customer_id, user_id)
-		customer = Customer.find(customer_id)
-		if (user_id == customer.user_id)
-			return 1
-		end
-		if find_manager(customer.user, user_id)
-			return 2
-		end
-		return 0
-		#customer.user.manager.id
-	end
-	def find_manager(user, manager_id)
-		if (user.manager_id.nil?)
-			return false
-		end
-		if (user.manager.id == manager_id)
-			return true
-		end
-		return find_manager(user.manager, manager_id)
+		TdCustomerResult.new(:result => true, :customer => c)
 	end
 	def request_to_customer(request, customer)
 		customer.name = request.name

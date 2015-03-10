@@ -9,17 +9,17 @@ class UserService < ActionWebService::Base
 		begin
 			user.save!
 		rescue Exception => e
-			return TdUserResult.new(:result => false, :msg => e, :users => nil)
+			return TdUserResult.new(:result => false, :msg => e)
 		end
-		TdUserResult.new :result => true, :msg => 'success', :users => [user]
+		TdUserResult.new :result => true, :user => user
 	end
 
 	def get_user_by_name(user_name)
-		return TdUserResult.new(:result => false, :msg => 'user name must input', :users => nil) unless user_name
+		#return TdUserResult.new(:result => false, :msg => 'user name must input') 
 		#u = User.where("user_name=?", user_name)
-		u = User.where(name: user_name).all
-		return TdUserResult.new(:result => false, :msg => 'user not found', :users => nil) if u.blank?
-		TdUserResult.new :result => true, :msg => 'user found', :users => u
+		u = User.where(name: user_name).first
+		return TdUserResult.new(:result => false, :msg => 'user not found') if u.blank?
+		TdUserResult.new :result => true, :user => u
 	end
 	def get_user_by_id(user_id)
 		c = User.find(user_id)
