@@ -22,8 +22,12 @@ class UserService < ActionWebService::Base
 		TdUserResult.new :result => true, :user => u
 	end
 	def get_user_by_id(user_id)
-		c = User.find(user_id)
-		TdUserResult.new(:result => true, :msg => 'done', :users => [c])
+		begin
+			c = User.find(user_id)
+		rescue Exception => e
+			return TdUserResult.new(:result => false, msg => e)
+		end
+		TdUserResult.new(:result => true, :user => c)
 	end
 	def get_frames_by_user_id(user_id)
 		user = User.includes(:roles).find(user_id)

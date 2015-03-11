@@ -79,7 +79,7 @@ namespace Powerson.Web
             TdUserResult res = userService.GetUserById(userid);
             if (!res.result)
                 return;
-            me = res.users[0];
+            me = res.user;
         }
 		protected override void OnError(EventArgs e)
 		{

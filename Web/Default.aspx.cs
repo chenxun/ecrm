@@ -50,12 +50,12 @@ namespace Powerson.Web
                 AddLoadMessage(res.msg);
                 return;
             }
-            if (!res.users[0].password.Equals(StringUtil.MD5Hash(TextBox_password.Text)))
+            if (!res.user.password.Equals(StringUtil.MD5Hash(TextBox_password.Text)))
             {
                 AddLoadMessage("√‹¬Î¥ÌŒÛ");
                 return;
             }
-            CurrentUserId = res.users[0].id;
+            CurrentUserId = res.user.id;
             //LoginSession.SetIsLogin(this, true);
             //LoginSession.SetCurrentUser(this, u);
 

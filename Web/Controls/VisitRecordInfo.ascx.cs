@@ -17,7 +17,6 @@ namespace Powerson.Web.Controls
 {
     public partial class VisitRecordInfo : UserControlBase
     {
-        ComponentArt.Web.UI.Calendar cal_visit ;
         protected void Page_Load(object sender, EventArgs e)
         {
             BaseInfoBind();
@@ -44,7 +43,7 @@ namespace Powerson.Web.Controls
         //        return ViewState["RecordId"].ToString();
         //    }
         //}
-        private void VisitInfoBind()
+        public void VisitInfoBind(VisitRecord record)
         {
             //if (null == RecordId)
             //    return;
@@ -59,8 +58,9 @@ namespace Powerson.Web.Controls
 
             //DataRow dr = ds.Tables[VisitRecordData._VISITRECORD_TABLE].Rows[0];
 
-            //ListControlUtil.FocusItemByText(DropDownList_type, dr[VisitRecordData.TITLE_FIELDS].ToString());
-            //TextBox_remark.Text = dr[VisitRecordData.REMARK_FIELDS].ToString();
+            FocusItemByText(DropDownList_type, record.title);
+            TextBox_remark.Text = record.remark;
+            FindPicker(PickerAndCalendar_visitDate).SelectedDate = record.visit_date;
             //cal_visit = (ComponentArt.Web.UI.Calendar)PickerAndCalendar_visitDate.FindControl("Picker1");
             //cal_visit.SelectedDate = Convert.ToDateTime(dr[VisitRecordData.VISITDATE_FIELDS]);
             //PersonId = dr[VisitRecordData.PERSONID_FIELDS].ToString();
@@ -75,8 +75,7 @@ namespace Powerson.Web.Controls
         {
             VisitRecord ret = new VisitRecord();
             ret.title = DropDownList_type.SelectedItem.Text;
-            cal_visit = (ComponentArt.Web.UI.Calendar)PickerAndCalendar_visitDate.FindControl("Picker1");
-            ret.visit_date = cal_visit.SelectedDate;
+            ret.visit_date = FindPicker(PickerAndCalendar_visitDate).SelectedDate;
             ret.remark = TextBox_remark.Text;
             return ret;
         }

@@ -18,9 +18,9 @@ namespace Powerson.Web
         Customer the_customer;
         protected void Page_Load(object sender, EventArgs e)
         {
+            BuildCustomer();
             if(!IsPostBack)
             {
-                BuildCustomer();
                 CustomerDataBind();
             }
 
@@ -77,7 +77,7 @@ namespace Powerson.Web
                 AddLoadMessage(res.msg);
                 return;
             }
-            the_customer = res.customers[0];
+            the_customer = res.customer;
         }
         /// <summary>
         /// 根据客户状态，检查各个按钮
@@ -113,10 +113,11 @@ namespace Powerson.Web
             //    Button_apply.Visible = true;
             //    return;
             //}
-            int u = customerService.CustomerUserRelation(the_customer.id, me.id);
             if (me.id == the_customer.user_id)
                 Button_saveCustomer.Visible = true;
-            //Button_add_rec.Visible = Button_saveCustomer.Visible;
+            if (userService.IsBoss(the_customer.user_id, me.id))//如果自己是当前客户负责人的老板
+                Button_saveCustomer.Visible = true;
+            Button_add_rec.Visible = Button_saveCustomer.Visible;
             //Button_opensea.Visible = Button_saveCustomer.Visible;
             Button_saveRecord.Visible = Button_saveCustomer.Visible;
             //Button_newproj.Visible = Button_saveCustomer.Visible;
@@ -140,6 +141,15 @@ namespace Powerson.Web
 
             Grid_visitRecord.DataSource = res;
             Grid_visitRecord.DataBind();
+        }
+        protected void Grid_visitRecord_ItemDataBound(object sender, ComponentArt.Web.UI.GridItemDataBoundEventArgs e)
+        {
+            VisitRecord r = (VisitRecord)e.DataItem;
+            TdUserResult res = userService.GetUserById(r.user_id);
+            if (res.result)
+            {
+                e.Item.ToArray()[2] = res.user.real_name;
+            }
         }
         /// <summary>
         /// 显示客户的历史变更记录
@@ -244,7 +254,7 @@ namespace Powerson.Web
         /// <param name="e"></param>
         protected void Button_addRecord_Click(object sender, EventArgs e)
         {
-            DataSet ds = new DataSet();
+            //DataSet ds = new DataSet();
             //dataCommon.GetAllData("select * from _Customers where id=" + CustomerInfo_edit.CustomerId, ds, CustomersData._CUSTOMERS_TABLE);
             //dataCommon.GetAllData("select top 1 * from _VisitRecord", ds, VisitRecordData._VISITRECORD_TABLE);
             //dataCommon.GetAllData(string.Format("select * from _VisitPlan where CustomerId={0} and PlanType=1 and PlanStatus='{1}'", CustomerInfo_edit.CustomerId, CustomerService.PLANSTATUS_PENDING), ds, VisitPlanData._VISITPLAN_TABLE);
@@ -261,7 +271,8 @@ namespace Powerson.Web
             //dr[VisitRecordData.TITLE_FIELDS] = VisitRecordInfo_addVisit.RecordTitle;
             //dr[VisitRecordData.VISITDATE_FIELDS] = VisitRecordInfo_addVisit.VisitDate;
             //ds.Tables[VisitRecordData._VISITRECORD_TABLE].Rows.Add(dr);
-
+            VisitRecord record = VisitRecordInfo_addVisit.GetRecord();
+            record = customerService.AddVisitRecord(the_customer.id, record.title, record.remark, record.visit_date, me.id);
             //foreach (DataRow dr_status in ds.Tables[VisitPlanData._VISITPLAN_TABLE].Rows)
             //{
             //    dr_status[VisitPlanData.PLANSTATUS_FIELDS] = CustomerService.PLANSTATUS_VISITED;
@@ -419,12 +430,5 @@ namespace Powerson.Web
             CustomerDataBind();
         }
 
-        protected void Grid_visitRecord_ItemDataBound(object sender, ComponentArt.Web.UI.GridItemDataBoundEventArgs e)
-        {
-            VisitRecord r = (VisitRecord)e.DataItem;
-            //TdUserResult u = userService.GetUserById(r.user_id);
-            //ComponentArt.Web.UI.GridItem item = new ComponentArt.Web.UI.GridItem(Grid_visitRecord,0,"mmm");
-            e.Item.ToArray()[2] = "www";
-        }
     }
 }
