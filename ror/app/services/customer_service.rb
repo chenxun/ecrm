@@ -24,6 +24,16 @@ class CustomerService < ActionWebService::Base
 		c = Customer.includes(:visit_records).find(customer_id)
 		records = c.visit_records
 	end
+	def add_visit_record(customer_id, title, remark, visit_date, user_id)
+		r = VisitRecord.new
+		r.customer_id = customer_id
+		r.title = title
+		r.remark = remark
+		r.visit_date = visit_date
+		r.user_id = user_id
+		r.save
+		return r
+	end
 	def save_customer(request)
 		begin
 			c = Customer.find(request.id)
