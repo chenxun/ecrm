@@ -202,10 +202,10 @@ namespace Powerson.Web
         {
             DataSet ds = new DataSet();
             //dataCommon.GetAllData("FindVisitPlan", FindPlan_visit.GetSqlPara(), ds, CustomersData._CUSTOMERS_TABLE);
-            DataView dv = ds.Tables[0].DefaultView;
-            dv.RowFilter = FindPlan_visit.GetRowFilter();
-            Grid_visitPlan.DataSource = dv;
-            Grid_visitPlan.DataBind();
+            //DataView dv = ds.Tables[0].DefaultView;
+            //dv.RowFilter = FindPlan_visit.GetRowFilter();
+            //Grid_visitPlan.DataSource = dv;
+            //Grid_visitPlan.DataBind();
         }
         protected void FindCustomer_visitPlan_FindCustomerButtonClick(object sender, EventArgs e)
         {
