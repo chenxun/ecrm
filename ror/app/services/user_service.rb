@@ -62,4 +62,8 @@ class UserService < ActionWebService::Base
 		end
 		return find_manager(user.manager, manager_id)
 	end
+	def get_soldiers(manager_id)
+		users = User.where(manager_id: manager_id)
+		TdUserResult.new(:result => true, :users => users)
+	end
 end
