@@ -5,6 +5,7 @@ class CustomerService < ActionWebService::Base
 		c = User.new
 		request_to_customer(request, c)
 		c.in_opensea = 0
+		c.add_date = Time.now
 		begin
 			c.save
 		rescue Exception => e
@@ -44,6 +45,14 @@ class CustomerService < ActionWebService::Base
 			return TdCustomerResult.new(:result => false, :msg => e)
 		end
 		TdCustomerResult.new(:result => true, :customer => c)
+	end
+	def find_customers(request)
+		customers = Customer.order('updated_at desc')
+		customers = customers.find_by_name(request.name) unless request.name.blank?
+		customers = customers.find_by_contactman(request.contact_man) unless request.contact_man.blank?
+		customers = customers.find_by_sales(request.sales_id) unless request.sales_id==0
+		customers = customers.find_by_addtime(request.add_date_from, request.add_date_from)
+		TdCustomerResult.new(:result => true, :customers => customers)
 	end
 	def request_to_customer(request, customer)
 		customer.name = request.name
