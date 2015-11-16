@@ -29,7 +29,7 @@ class UserService < ActionWebService::Base
 		end
 		TdUserResult.new(:result => true, :user => c)
 	end
-	def get_frames_by_user_id(user_id)
+	def get_frames_by_user(user_id)
 		user = User.includes(:roles).find(user_id)
 		roles = user.roles
 		return nil if roles.blank?
@@ -42,7 +42,7 @@ class UserService < ActionWebService::Base
 		end
 		ret = Frame.order('rank').find(frame_ids)
 	end
-	def get_roles_by_user_id(user_id)
+	def get_roles_by_user(user_id)
 		user = User.includes(:roles).find(user_id)
 		roles = user.roles
 	end
