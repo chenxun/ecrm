@@ -25,14 +25,18 @@ class UserService < ActionWebService::Base
 		begin
 			c = User.find(user_id)
 		rescue Exception => e
-			return TdUserResult.new(:result => false, msg => e)
+			return TdUserResult.new(:result => false, :msg => e)
 		end
 		TdUserResult.new(:result => true, :user => c)
 	end
 	def get_frames_by_user(user_id)
-		user = User.includes(:roles).find(user_id)
-		roles = user.roles
-		return nil if roles.blank?
+		begin
+			user = User.includes(:roles).find(user_id)
+			roles = user.roles			
+		rescue Exception => e
+			return TdFrameResult.new(:result => false, :msg => e)
+		end
+		return TdFrameResult.new(:result => true, :msg => ['? has no roles', user.name]) if roles.blank?
 		frame_ids = []
 		roles.each do |role|
 			frames = role.frames
@@ -41,9 +45,10 @@ class UserService < ActionWebService::Base
 			end
 		end
 		ret = Frame.order('rank').find(frame_ids)
+		return TdFrameResult.new(:result=>true, :frames=>ret)
 	end
 	def get_roles_by_user(user_id)
-		user = User.includes(:roles).find(user_id)
+		user = User.find(user_id)
 		roles = user.roles
 	end
 	def get_roles_all

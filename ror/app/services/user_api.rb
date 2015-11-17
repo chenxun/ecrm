@@ -7,7 +7,7 @@ class UserApi < ActionWebService::API::Base
 	api_method :get_soldiers, :expects => [{:manager_id=>:int}], :returns => [TdUserResult]
 	api_method :is_boss, :expects => [{:soldier_id=>:int},{:manager_id=>:int}], :returns => [:bool]
 	# role api
-	api_method :get_frames_by_user, :expects => [{:user_id => :int}], :returns => [[Frame]]
+	api_method :get_frames_by_user, :expects => [{:user_id => :int}], :returns => [TdFrameResult]
 	api_method :get_roles_by_user, :expects => [{:user_id => :int}], :returns => [[Role]]
 	api_method :set_user_roles, :expects => [{:user_id=>:int},{:roles=>[:int]}], :returns => [:int]
 	api_method :get_roles_all, :expects => [], :returns => [[Role]]
